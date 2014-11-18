@@ -1,0 +1,21 @@
+{
+  "name": "node-marketo",
+  "version": "0.1.0",
+  "description": "marketo rest client",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/usermindinc/node-marketo/"
+  },
+  "engines": {
+    "node": ">=0.10.29"
+  },
+  "dependencies": {
+    "bluebird": "2.3.x",
+    "bunyan": "1.0.x",
+    "lodash": "2.4.x",
+    "moment": "2.5.x",
+    "restler": "3.1.x"
+  },
+  "devDependencies": {
+  }
+}
