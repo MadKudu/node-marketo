@@ -162,9 +162,61 @@ param | type | description
 
 ```js
 // Add leads 1, 2, and 3 to list id 1
-marketo.lead.addLeadsToList(1, [1, 2, 3])
+marketo.list.addLeadsToList(1, [1, 2, 3])
 
 
 // Same thing, in object form
-marketo.lead.addLeadsToList(1, [{id: 1}, {id: 2}, {id: 3}])
+marketo.list.addLeadsToList(1, [{id: 1}, {id: 2}, {id: 3}])
 ```
+
+
+# Test
+
+### Generating a replay for a test
+
+The initial run of the test has to be run against an actual API, the run (when
+in recording mode) should capture the API request/response data, which will then
+be used for future calls. What makes this a little tricky is Marketo API
+endpoints are unique per account, so we have to convert the captured data to
+something else for future purposes. We also need to remove credentials from
+these captures as well. Anyway, here's the annoying process of generating data:
+
+##### Running against the actual API
+
+The test looks at 4 environment variables when running, they are:
+
+- `MARKETO_ENDPOINT`
+- `MARKETO_IDENTITY`
+- `MARKETO_CLIENT_ID`
+- `MARKETO_CLIENT_SECRET`
+
+After setting these variables, run `npm run testRecord`.
+
+##### Stripping sensitive information
+
+Run the script `./scripts/strip-fixtures.sh`, which will convert the unique
+Marketo host over to `123-abc-456.mktorest.com` in addition to removing the
+capture that contains sensitive client id/secret file.
+
+##### Copy the data
+
+The data should now be moved over to `fixtures/123-abc-456.mktorest.com-443`,
+preferably with a useful name so it's easier to keep track of in the future.
+
+##### Tip
+
+We are using mocha to run the test, you can run a single test so that you
+generate only the needed data. To do so, you append `only` to a test:
+
+```js
+    // on a single unit test
+    it.only('test description, function() {})
+
+    // or an entire describe
+    describe.only('test description, function() {})
+```
+
+One more thing to note is that once we've processed the raw data, `node-replay`
+will not be able to map it back to the original raw request. This means that if
+you run `npm run testRecord`, you will be generating requests against Marketo's
+API directly. I highly recommend using `only`.

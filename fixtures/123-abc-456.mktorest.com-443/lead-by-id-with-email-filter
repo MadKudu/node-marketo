@@ -1,0 +1,14 @@
+GET /rest/v1/lead/1.json?fields=email
+accept: */*
+host: 123-abc-456.mktorest.com
+accept-encoding: gzip, deflate
+
+200 HTTP/1.1
+server: nginx
+date: Wed, 19 Nov 2014 22:59:54 GMT
+content-type: application/json;charset=UTF-8
+content-length: 102
+connection: keep-alive
+set-cookie: BIGipServerab-restapi_https=571015434.47873.0000; path=/
+
+{"requestId":"6ff6#149ca4892e0","result":[{"id":1,"email":"ak+marketo1@usermind.com"}],"success":true}
