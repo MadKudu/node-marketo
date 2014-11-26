@@ -1,0 +1,16 @@
+POST /rest/v1/leads.json
+accept: */*
+host: 123-abc-456.mktorest.com
+accept-encoding: gzip, deflate
+content-type: application/x-www-form-urlencoded
+body: filterType=id&filterValues=1&_method=GET
+
+200 HTTP/1.1
+server: nginx
+date: Wed, 19 Nov 2014 23:18:44 GMT
+content-type: application/json;charset=UTF-8
+content-length: 206
+connection: keep-alive
+set-cookie: BIGipServerab-restapi_https=587792650.47873.0000; path=/
+
+{"requestId":"6365#149ca59d38a","result":[{"id":1,"updatedAt":"2014-11-13 12:43:04","lastName":"test","email":"ak+marketo1@usermind.com","createdAt":"2014-11-13 12:43:03","firstName":"AK1"}],"success":true}

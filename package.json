@@ -9,6 +9,10 @@
   "engines": {
     "node": ">=0.10.29"
   },
+  "scripts": {
+    "test": "mocha test/*test.js",
+    "testRecord": "REPLAY=record mocha -t 10000 test/*test.js"
+  },
   "dependencies": {
     "bluebird": "2.3.x",
     "bunyan": "1.0.x",
@@ -17,5 +21,7 @@
     "restler": "3.1.x"
   },
   "devDependencies": {
+    "mocha": "2.0.x",
+    "replay": "1.11.x"
   }
 }
