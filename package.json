@@ -1,6 +1,6 @@
 {
   "name": "node-marketo",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "marketo rest client",
   "repository": {
     "type": "git",
@@ -14,6 +14,7 @@
     "testRecord": "REPLAY=record mocha -t 10000 test/*test.js"
   },
   "dependencies": {
+    "backoff": "2.4.x",
     "bluebird": "2.3.x",
     "bunyan": "1.0.x",
     "lodash": "2.4.x",
