@@ -169,6 +169,23 @@ marketo.list.addLeadsToList(1, [1, 2, 3])
 marketo.list.addLeadsToList(1, [{id: 1}, {id: 2}, {id: 3}])
 ```
 
+#### list.getLeads(options)
+
+Implements [Get Multiple Leads by List Id](http://developers.marketo.com/documentation/rest/get-multiple-leads-by-list-id)
+
+param | type | description
+------|------|------------
+`listId` | int | the id of the list you want to get leads
+`options` | object | `fields`: a comma separated list or array of fields to retrieve
+ | | `batchSize`: the number of lead records to be returned (max is 300)
+ | | `nextPageToken`: used to paginate through large result sets
+ | | `fields`: a comma separated list or array of fields to retrieve
+
+```js
+// Get leads from list id 1
+marketo.list.getLeads(1)
+```
+
 
 # Test
 
