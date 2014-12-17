@@ -6,7 +6,9 @@ This implements (a subset of) Marketo's REST API.
 
 This library is a simple wrapper around Marketo's REST API and does not aim to be anything more than that.
 
-## Creating a connection
+## Usage
+
+### Creating a connection
 
 You will first need to obtain your OAuth information from Marketo, they have a [guide out](http://developers.marketo.com/documentation/rest/authentication/) to get you started. In short, you will need to get the endpoint url, identity url, client id and client secret.
 
@@ -21,7 +23,7 @@ var marketo = new Marketo({
 });
 
 marketo.lead.find('id', [2, 3])
-  .spread(function(data, resp) {
+  .then(function(data, resp) {
     // data is:
     // {
     //   requestId: '17787#149c01d54b8',
@@ -41,9 +43,76 @@ marketo.lead.find('id', [2, 3])
   });
 ```
 
+### Pagination
 
-## Implemented API
+When a specific call results in a lot of elements, you will have to paginate to get all of the data. For example, getting all the leads in a large list will likely exceed the maximum batch size of 300. When this happens, you can check for the existence of the `nextPageToken` and use it in the next call:
 
+```js
+marketo.list.getLeads(1)
+  .then(function(data) {
+    if (data.nextPageToken) {
+      // preserve the nextPageToken for use in the next call
+    }
+  });
+```
+
+If you want a less manual process, the result comes with a convenient `nextPage` function that you can use. This function only exists if there's additional data:
+
+```js
+marketo.list.getLeads(1)
+  .then(function(page1) {
+    // do something with page1
+
+    if (data.nextPageToken) {
+      return page1.nextPage();
+    }
+  })
+  .then(function(page2) {
+    // do something with page2
+  });
+```
+
+### Stream
+
+Instead of getting data back inside of the promise, you can also turn the response into a stream by using the `Marketo.streamify` function. This will emit the results one element at a time. If the result is paginated, it will lazily load all of the pages until it's done:
+
+```js
+// Wraping the resulting promise
+var resultStream = Marketo.streamify(marketo.list.getLeads(1))
+
+resultStream
+  .on('data', function(lead) {
+    // do something with lead
+  })
+  .on('error', function(err) {
+    // log the list error. Note, the stream closes if it encounters an error
+  })
+  .on('end', function() {
+    // end of the stream
+  });
+```
+
+Since the data is lazily loaded, you can stop the stream and will not incur additional API calls:
+
+```js
+var count = 0;
+
+resultStream
+  .on('data', function(data) {
+    if (++count > 20) {
+      // Closing stream, this CAN be called multiple times because the
+      // buffer of the queue may already contain additional data
+      resultStream.endMarketoStream();
+    }
+  })
+  .on('end', function() {
+    // count here CAN be more than 20
+    console.log('done, count is', count);
+  });
+```
+
+
+## Implemented Marketo Endpoints
 
 ### Lead
 
@@ -58,13 +127,13 @@ param | type | description
 
 ```js
 marketo.lead.byId(3)
-  .spread(function(data) {
+  .then(function(data) {
     console.log(data);
   })
 
 // Using the field attribute
 marketo.lead.byId(3, ['email', 'lastName'])
-  .spread(function(data) {
+  .then(function(data) {
     // data.result[0]
     //
     // {
