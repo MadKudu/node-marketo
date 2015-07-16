@@ -38,7 +38,7 @@ describe('Lists', function() {
   });
   describe('#isMember', function() {
     it('finds a lead as member of list', function(done) {
-      marketo.list.isMember(1001, 42).then(function(response) {
+      marketo.list.isMember(1001, [42]).then(function(response) {
         assert.equal(response.result.length, 1);
         assert.equal(response.result[0].id, 42);
         assert(_.has(response.result[0], 'status'));
@@ -47,7 +47,7 @@ describe('Lists', function() {
       });
     });
     it('does not find a lead missing from a list', function(done) {
-      marketo.list.isMember(1001, 44).then(function(response) {
+      marketo.list.isMember(1001, [44]).then(function(response) {
         assert.equal(response.result.length, 1);
         assert.equal(response.result[0].id, 44);
         assert(_.has(response.result[0], 'status'));
@@ -58,7 +58,7 @@ describe('Lists', function() {
   });
   describe('#removeLeadsFromList', function() {
     it('removes a lead from a list', function(done) {
-      marketo.list.removeLeadsFromList(1001, 42).then(function(response) {
+      marketo.list.removeLeadsFromList(1001, [42]).then(function(response) {
         assert.equal(response.result.length, 1);
         assert.equal(response.result[0].id, 42);
         assert(_.has(response.result[0], 'status'));
