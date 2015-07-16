@@ -1,0 +1,15 @@
+DELETE /rest/v1/lists/1001/leads.json?id=42
+accept: */*
+host: 123-abc-456.mktorest.com
+accept-encoding: gzip, deflate
+authorization: Bearer bda399e0-a68e-4d9b-bc2f-aa2657746b06:ablakjsdlaskjdfl
+
+200 HTTP/1.1
+server: nginx
+date: Wed, 19 Nov 2014 21:36:58 GMT
+content-type: application/json;charset=UTF-8
+content-length: 207
+connection: keep-alive
+set-cookie: BIGipServerab-restapi_https=571015434.47873.0000; path=/
+
+{ "requestId": "11772#14e452efa35", "result": [ { "id": 42, "status": "removed" } ], "success": true }
