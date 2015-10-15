@@ -151,10 +151,10 @@ generate only the needed data. To do so, you append `only` to a test:
 
 ```js
     // on a single unit test
-    it.only('test description, function() {})
+    it.only('test description', function() {})
 
     // or an entire describe
-    describe.only('test description, function() {})
+    describe.only('test description', function() {})
 ```
 
 One more thing to note is that once we've processed the raw data, `node-replay`
