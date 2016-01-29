@@ -18,7 +18,7 @@ marketo.lead.byId(3)
   })
 
 // Using the field attribute
-marketo.lead.byId(3, ['email', 'lastName'])
+marketo.lead.byId(3, {fields: ['email', 'lastName']})
   .then(function(data) {
     // data.result[0]
     //
