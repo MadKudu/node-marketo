@@ -1,3 +1,6 @@
+# Up for adoption
+Hey folks! We at [Usermind, Inc](https://github.com/usermindinc) have stopped active development on this repo. If you'd like to step in and own this project, please [file an issue](https://github.com/usermindinc/node-marketo/issues/new?title=Transfer+Ownership) saying so.
+
 # node-marketo
 
 This implements (a subset of) Marketo's REST API.
