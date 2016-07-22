@@ -66,7 +66,7 @@ marketo.list.getLeads(1)
   .then(function(page1) {
     // do something with page1
 
-    if (data.nextPageToken) {
+    if (page1.nextPageToken) {
       return page1.nextPage();
     }
   })
