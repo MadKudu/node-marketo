@@ -1,19 +1,21 @@
 # node-marketo
 
-This implements (a subset of) Marketo's REST API.
-
-## Overview
-
-This library is a simple wrapper around Marketo's REST API and does not aim to be anything more than that.
+A wrapper around Marketo's REST API.
 
 ## Usage
+
+### Installation
+
+```
+npm install --save node-marketo-rest
+```
 
 ### Creating a connection
 
 You will first need to obtain your OAuth information from Marketo, they have a [guide out](http://developers.marketo.com/documentation/rest/authentication/) to get you started. In short, you will need to get the endpoint url, identity url, client id and client secret.
 
 ```js
-var Marketo = require('node-marketo');
+var Marketo = require('node-marketo-rest');
 
 var marketo = new Marketo({
   endpoint: 'https://123-ABC-456.mktorest.com/rest',
