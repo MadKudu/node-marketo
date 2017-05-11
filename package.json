@@ -19,7 +19,7 @@
     "bunyan": "1.0.x",
     "lodash": "2.4.x",
     "moment": "2.5.x",
-    "restler": "3.1.x"
+    "restler": "3.4.x"
   },
   "devDependencies": {
     "mocha": "2.0.x",
