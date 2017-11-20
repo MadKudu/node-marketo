@@ -75,6 +75,25 @@ marketo.lead.createOrUpdate(
   )
 ```
 
+#### lead.push(input, options)
+
+Implements [Push Leads](http://developers.marketo.com/rest-api/endpoint-reference/lead-database-endpoint-reference/#!/Leads/pushToMarketoUsingPOST)
+
+param | type | description
+------|------|------------
+`input`  | Array<Object> | An array of lead records to push
+`options` | object | 
+ | | `lookupField`: the field used to dedup on
+ | | `programName `: the program name in Marketo
+
+```js
+// Push a lead to Marketo program name
+marketo.lead.push(
+    [{'email': 'email@one.com'}, {'email': 'email@two.com'}],
+    {lookupField: 'email', programName: 'Test program name'}
+  )
+```
+
 ### List
 
 #### list.find(options)
