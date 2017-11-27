@@ -1,6 +1,6 @@
 {
   "name": "node-marketo-rest",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "marketo rest client",
   "repository": {
     "type": "git",
