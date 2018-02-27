@@ -4,13 +4,10 @@ var assert = require('assert'),
   marketo = require('./helper/connection');
 
 let hasReplay = false;
-let createRequest = () => marketo.bulkLeadExtract.create(
-  ['firstName', 'lastName', 'id', 'email'],
-  { staticListName: 'prova' } // { updatedAt: { startAt: moment(), endAt: moment() } }
-);
-let cancelRequest = (res, done) => marketo.bulkLeadExtract.cancel(res.result[0].exportId).then(() => done()).catch(done);
+let createRequest = () => marketo.bulkActivityExtract.create({ createdAt: { startAt: moment(), endAt: moment() } });
+let cancelRequest = (res, done) => marketo.bulkActivityExtract.cancel(res.result[0].exportId).then(() => done()).catch(done);
 
-describe('Bulk Lead Extract', function () {
+describe('Bulk Activity Extract', function () {
   describe('#create', function () {
     it('creates an extract', function (done) {
       createRequest().then(function (response) {
@@ -28,7 +25,7 @@ describe('Bulk Lead Extract', function () {
     it('enqueus an extract', function (done) {
       createRequest().then(function (res) {
         let exportId = res.result[0].exportId;
-        marketo.bulkLeadExtract.enqueue(exportId).then(function (response) {
+        marketo.bulkActivityExtract.enqueue(exportId).then(function (response) {
           assert.equal(response.result.length, 1);
           assert.equal(response.result[0].status, 'Queued');
 
@@ -43,7 +40,7 @@ describe('Bulk Lead Extract', function () {
     it('checks the status of an extract', function (done) {
       createRequest().then(function (res) {
         let exportId = res.result[0].exportId;
-        marketo.bulkLeadExtract.status(exportId).then(function (response) {
+        marketo.bulkActivityExtract.status(exportId).then(function (response) {
           assert.equal(response.result.length, 1);
           assert(_.has(response.result[0], 'status'));
 
@@ -60,8 +57,8 @@ describe('Bulk Lead Extract', function () {
         this.timeout(60000 * 10);
         createRequest().then(function (res) {
           let exportId = res.result[0].exportId;
-          marketo.bulkLeadExtract.enqueue(exportId).then(function (res) {
-            marketo.bulkLeadExtract.statusTilCompleted(exportId).then(function (response) {
+          marketo.bulkActivityExtract.enqueue(exportId).then(function (res) {
+            marketo.bulkActivityExtract.statusTilCompleted(exportId).then(function (response) {
               assert.equal(response.result.length, 1);
               assert.equal(response.result[0].status, 'Completed');
               done();
@@ -75,7 +72,7 @@ describe('Bulk Lead Extract', function () {
     it('cancels an extract', function (done) {
       createRequest().then(function (res) {
         let exportId = res.result[0].exportId;
-        marketo.bulkLeadExtract.cancel(exportId).then(function (response) {
+        marketo.bulkActivityExtract.cancel(exportId).then(function (response) {
           assert.equal(response.result.length, 1);
           assert.equal(response.result[0].status, 'Cancelled');
           done();
@@ -88,13 +85,11 @@ describe('Bulk Lead Extract', function () {
     describe('#get', function () {
       it('coordinates an extract until completed', function (done) {
         this.timeout(60000 * 10);
-        marketo.bulkLeadExtract.get(
-          ['firstName', 'lastName', 'id', 'email'],
-          { staticListName: 'prova' }).then(function (response) {
-            assert.equal(response.result.length, 1);
-            assert.equal(response.result[0].status, 'Completed');
-            done();
-          }).catch(done);
+        marketo.bulkActivityExtract.get({ createdAt: { startAt: moment(), endAt: moment() } }).then(function (response) {
+          assert.equal(response.result.length, 1);
+          assert.equal(response.result[0].status, 'Completed');
+          done();
+        }).catch(done);
       });
     });
 
@@ -102,7 +97,7 @@ describe('Bulk Lead Extract', function () {
     it('downloads an extract file', function (done) {
       done();
       // not tested - need file handle
-      // marketo.bulkLeadExtract.file(1).then(function (response) {
+      // marketo.bulkActivityExtract.file(1).then(function (response) {
       //   assert.equal(response.result.length, 1);
       //   done();
       // }).catch(done);
@@ -113,7 +108,7 @@ describe('Bulk Lead Extract', function () {
     it('streams an extract file', function (done) {
       done();
       // not tested - need file handle
-      // marketo.bulkLeadExtract.fileStream(1).then(function (response) {
+      // marketo.bulkActivityExtract.fileStream(1).then(function (response) {
       //   assert.equal(response.result.length, 1);
       //   done();
       // }).catch(done);

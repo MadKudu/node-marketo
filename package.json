@@ -22,7 +22,7 @@
     "restler": "3.4.x"
   },
   "devDependencies": {
-    "mocha": "2.0.x",
-    "replay": "1.11.x"
+    "mocha": "^5.0.1",
+    "replay": "^2.1.4"
   }
 }

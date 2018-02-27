@@ -1,21 +1,21 @@
 var assert = require('assert'),
-    _ = require('lodash'),
-    marketo = require('./helper/connection');
+  _ = require('lodash'),
+  marketo = require('./helper/connection');
 
-describe('Leads', function() {
-  describe('#byId', function() {
-    it('finds a lead by id only', function(done) {
-      marketo.lead.byId(1).then(function(response) {
+describe('Leads', function () {
+  describe('#byId', function () {
+    it('finds a lead by id only', function (done) {
+      marketo.lead.byId(1).then(function (response) {
         assert.equal(response.result.length, 1);
         assert.equal(response.result[0].id, 1);
         assert(_.has(response.result[0], 'email'));
         assert(_.has(response.result[0], 'lastName'));
         done();
-      });
+      }).catch(done);
     });
 
-    it('finds a lead but only retrieve the email field', function(done) {
-      marketo.lead.byId(1, {fields: ['email']}).then(function(resp) {
+    it('finds a lead but only retrieve the email field', function (done) {
+      marketo.lead.byId(1, { fields: ['email'] }).then(function (resp) {
         assert.equal(resp.result.length, 1);
 
         var lead = resp.result[0];
@@ -24,11 +24,11 @@ describe('Leads', function() {
         assert(_.has(lead, 'email'));
         assert(!_.has(lead, 'lastName'));
         done();
-      });
+      }).catch(done);
     });
 
-    it('finds a lead and retrieve a subset of fields using csv', function(done) {
-      marketo.lead.byId(1, {fields: 'email,lastName'}).then(function(resp) {
+    it('finds a lead and retrieve a subset of fields using csv', function (done) {
+      marketo.lead.byId(1, { fields: 'email,lastName' }).then(function (resp) {
         assert.equal(resp.result.length, 1);
 
         var lead = resp.result[0];
@@ -37,13 +37,13 @@ describe('Leads', function() {
         assert(_.has(lead, 'email'));
         assert(_.has(lead, 'lastName'));
         done();
-      });
+      }).catch(done);
     });
   });
 
-  describe('#find', function() {
-    it('uses a single filter value', function(done) {
-      marketo.lead.find('id', [1]).then(function(resp) {
+  describe('#find', function () {
+    it('uses a single filter value', function (done) {
+      marketo.lead.find('id', [1]).then(function (resp) {
         assert.equal(resp.result.length, 1);
 
         var lead = resp.result[0];
@@ -51,21 +51,20 @@ describe('Leads', function() {
         assert(_.has(lead, 'email'));
         assert(_.has(lead, 'lastName'));
         done();
-      });
+      }).catch(done);
     });
 
-    it('uses multiple filter values', function(done) {
-      marketo.lead.find('id', [1,2]).then(function(resp) {
+    it('uses multiple filter values', function (done) {
+      marketo.lead.find('id', [1, 2]).then(function (resp) {
         assert.equal(resp.result.length, 2);
         assert.equal(resp.result[0].id, 1);
         assert.equal(resp.result[1].id, 2);
         done();
-      });
+      }).catch(done);
     });
 
-
-    it('uses multiple filter values and retrieve a subset of fields', function(done) {
-      marketo.lead.find('id', [1,2], {fields: ['email', 'lastName']}).then(function(resp) {
+    it('uses multiple filter values and retrieve a subset of fields', function (done) {
+      marketo.lead.find('id', [1, 2], { fields: ['email', 'lastName'] }).then(function (resp) {
         assert.equal(resp.result.length, 2);
         assert.equal(resp.result[0].id, 1);
         assert.equal(resp.result[1].id, 2);
@@ -79,15 +78,15 @@ describe('Leads', function() {
     });
   });
 
-  describe('#createOrUpdate', function() {
-    it('updates an existing record by using an email', function(done) {
-      marketo.lead.createOrUpdate([{email: 'ak+marketo1@usermind.com'}], {lookupField: 'email'})
-        .then(function(resp) {
+  describe('#createOrUpdate', function () {
+    it('updates an existing record by using an email', function (done) {
+      marketo.lead.createOrUpdate([{ email: 'ak+marketo1@usermind.com' }], { lookupField: 'email' })
+        .then(function (resp) {
           assert.equal(resp.result.length, 1);
           assert.equal(resp.result[0].id, 1);
           assert.equal(resp.result[0].status, 'updated');
           done();
-        });
+        }).catch(done);
     })
   });
 });

@@ -1,0 +1,15 @@
+POST /rest/../bulk/v1/activities/export/be54257c-84a5-4d76-a11c-ef69bfa3389f/cancel.json
+accept: */*
+host: 347-bjx-996.mktorest.com
+accept-encoding: gzip, deflate
+content-type: application/x-www-form-urlencoded
+body: _method=POST
+
+HTTP/1.1 200 OK
+server: nginx
+date: Tue, 27 Feb 2018 20:12:05 GMT
+content-type: application/json;charset=UTF-8
+content-length: 182
+connection: close
+
+{"requestId":"17c05#161d8e4bed2","result":[{"exportId":"be54257c-84a5-4d76-a11c-ef69bfa3389f","format":"CSV","status":"Cancelled","createdAt":"2018-02-27T20:12:04Z"}],"success":true}

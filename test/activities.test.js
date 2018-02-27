@@ -11,7 +11,7 @@ describe('Activities', function() {
         assert.equal(activity.name, 'Visit Webpage')
         assert(_.has(activity, 'primaryAttribute'));
         done();
-      });
+      }).catch(done);
     });
   });
 })
