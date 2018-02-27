@@ -1,6 +1,6 @@
 POST /rest/../bulk/v1/leads/export/6ddf637d-ca39-4eea-808b-4dc7d0402f04/cancel.json
 accept: */*
-host: 347-bjx-996.mktorest.com
+host: 123-abc-456.mktorest.com
 accept-encoding: gzip, deflate
 content-type: application/x-www-form-urlencoded
 body: _method=POST

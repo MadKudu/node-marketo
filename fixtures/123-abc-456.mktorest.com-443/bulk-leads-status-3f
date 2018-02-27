@@ -1,6 +1,6 @@
 GET /rest/../bulk/v1/leads/export/3fadb012-5810-40ba-a5ca-56300ecf10d4/status.json
 accept: */*
-host: 347-bjx-996.mktorest.com
+host: 123-abc-456.mktorest.com
 accept-encoding: gzip, deflate
 content-type: application/x-www-form-urlencoded
 body: _method=GET
