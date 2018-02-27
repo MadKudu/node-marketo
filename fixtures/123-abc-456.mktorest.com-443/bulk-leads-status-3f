@@ -1,0 +1,15 @@
+GET /rest/../bulk/v1/leads/export/3fadb012-5810-40ba-a5ca-56300ecf10d4/status.json
+accept: */*
+host: 123-abc-456.mktorest.com
+accept-encoding: gzip, deflate
+content-type: application/x-www-form-urlencoded
+body: _method=GET
+
+HTTP/1.1 200 OK
+server: nginx
+date: Tue, 27 Feb 2018 20:12:13 GMT
+content-type: application/json;charset=UTF-8
+content-length: 179
+connection: close
+
+{"requestId":"d6e9#161d8e4dfff","result":[{"exportId":"3fadb012-5810-40ba-a5ca-56300ecf10d4","format":"CSV","status":"Created","createdAt":"2018-02-27T20:12:13Z"}],"success":true}

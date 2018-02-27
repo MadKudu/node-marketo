@@ -2,3 +2,4 @@
 /.idea/
 *.iml
 test/helper/config.bk.js
+package-lock.json

@@ -1,0 +1,15 @@
+POST /rest/../bulk/v1/activities/export/7220a628-3d79-4ab9-9e25-5b2a2108b249/enqueue.json
+accept: */*
+host: 123-abc-456.mktorest.com
+accept-encoding: gzip, deflate
+content-type: application/x-www-form-urlencoded
+body: _method=POST
+
+HTTP/1.1 200 OK
+server: nginx
+date: Tue, 27 Feb 2018 20:12:04 GMT
+content-type: application/json;charset=UTF-8
+content-length: 212
+connection: close
+
+{"requestId":"8af7#161d8e4bb93","result":[{"exportId":"7220a628-3d79-4ab9-9e25-5b2a2108b249","format":"CSV","status":"Queued","createdAt":"2018-02-27T20:12:04Z","queuedAt":"2018-02-27T20:12:04Z"}],"success":true}

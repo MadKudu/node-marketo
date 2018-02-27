@@ -1,0 +1,15 @@
+POST /rest/../bulk/v1/activities/export/create.json
+accept: */*
+host: 123-abc-456.mktorest.com
+accept-encoding: gzip, deflate
+content-type: application/json
+body: {\"filter\":{\"createdAt\":{\"startAt\":\"2018-02-27T20:12:03.053Z\",\"endAt\":\"2018-02-27T20:12:03.053Z\"}}}
+
+HTTP/1.1 200 OK
+server: nginx
+date: Tue, 27 Feb 2018 20:12:03 GMT
+content-type: application/json;charset=UTF-8
+content-length: 179
+connection: close
+
+{"requestId":"ceed#161d8e4b842","result":[{"exportId":"e027175b-c61f-4611-a639-40c99304d9ab","format":"CSV","status":"Created","createdAt":"2018-02-27T20:12:03Z"}],"success":true}
