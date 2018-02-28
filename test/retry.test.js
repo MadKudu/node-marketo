@@ -62,7 +62,7 @@ describe('Retry logic', function() {
       }
     })
     .catch(function(err) {
-      assert.equal(err.code, '5XX');
+      assert.equal(err.code, '501');
       assert.equal(server.count(path), 4);
       done();
     })
