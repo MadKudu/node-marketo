@@ -1,0 +1,1068 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cake.Git</name>
+    </assembly>
+    <members>
+        <member name="T:Cake.Git.GitAliases">
+            <summary>
+            Class GitAliases.
+            </summary>
+            <summary>
+            Contains functionality for working with GIT using LibGit2 &amp; LibGit2Sharp
+            </summary>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitTags(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Gets a list of all tags from the repo
+            </summary>
+            <param name="context"></param>
+            <param name="repositoryDirectoryPath"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitUnstage(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath[])">
+            <summary>
+            Removes from the staging area all the modifications of a collection of file since the latest commit (addition, updation or removal).
+            </summary>
+            <example>
+            <code>
+                var filePaths = new FilePath[] { ".\\test.txt" };
+                GitUnstage("c:/temp/cake", filePaths);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="filePaths">Path to file(s) to unstage.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitUnstageAll(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Removes from the staging area all the modifications all files the latest commit (addition, updation or removal).
+            </summary>
+            <example>
+            <code>
+                GitUnstageAll("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitIsValidRepository(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Checks if a specific directory is a valid Git repository.
+            </summary>
+            <example>
+            <code>
+                var result = GitIsValidRepository("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="path">Path to the repository to check.</param>
+            <returns>True if the path is part of a valid Git Repository.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+            <exception cref="T:LibGit2Sharp.RepositoryNotFoundException">If path doesn't exist.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitHasUncommitedChanges(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Checks if a repository contains uncommited changes.
+            </summary>
+            <example>
+            <code>
+                var result = GitHasUncommitedChanges("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="path">Path to the repository to check.</param>
+            <returns>True if the Git repository contains uncommited changes.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+            <exception cref="T:LibGit2Sharp.RepositoryNotFoundException">If path doesn't exist.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitHasStagedChanges(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Checks if a repository contains staged changes.
+            </summary>
+            <example>
+            <code>
+                var result = GitHasStagedChanges("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="path">Path to the repository to check.</param>
+            <returns>True if the Git repository contains staged changes.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+            <exception cref="T:LibGit2Sharp.RepositoryNotFoundException">If path doesn't exist.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitFindRootFromPath(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Finding git root path from subtree.
+            </summary>
+            <example>
+            <code>
+                var result = GitFindRootFromPath("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="path">Path to probe the repository.</param>
+            <returns>The path to the repository root.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+            <exception cref="T:LibGit2Sharp.RepositoryNotFoundException">If git root path not found.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitReset(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Git.GitResetMode,System.String)">
+            <summary>
+            Sets the current branch head (HEAD) to a specified commit, 
+            optionally modifying index and working tree to match.
+            </summary>
+            <example>
+            <code>
+                GitReset("c:/temp/cake", GitResetMode.Hard, "commit id");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="mode">The effect that the reset action should have on the the index and working tree.</param>
+            <param name="commitId">The id of the commit to which the current branch HEAD should be set.</param>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitReset(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Git.GitResetMode)">
+            <summary>
+            Resets the current branch head (HEAD) optionally modifying index and working tree to match.
+            </summary>
+            <example>
+            <code>
+                GitReset("c:/temp/cake", GitResetMode.Hard);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="mode">The effect that the reset action should have on the the index and working tree.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitBranchCurrent(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Gets the current branch.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <returns>GitBranch.</returns>
+            <exception cref="T:System.ArgumentNullException">context
+            or
+            repositoryDirectoryPath</exception>
+            <example>
+              <code>
+            var repositoryDirectoryPath = DirectoryPath.FromString(".");
+            var currentBranch = ((ICakeContext)cakeContext).GitBranchCurrent(repositoryDirectoryPath);
+              </code>
+            </example>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitCheckout(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,Cake.Core.IO.FilePath[])">
+            <summary>
+            Checkout file(s) using supplied commit or branch spec.
+            </summary>
+            <example>
+            <code>
+                var filePaths = new FilePath[] { ".\\test.txt" };
+                GitCheckout("c:/temp/cake", "develop", filePaths);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="committishOrBranchSpec">A revparse spec for the commit or branch to checkout paths from.</param>
+            <param name="filePaths">Path to files to checkout.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitCheckout(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath[])">
+            <summary>
+            Checkout file.
+            </summary>
+            <example>
+            <code>
+                var filePaths = new FilePath[] { ".\\test.txt" };
+                GitCheckout("c:/temp/cake", filePaths);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="filePaths">Path to files to remove.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitAdd(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Core.IO.FilePath[])">
+            <summary>
+            Add file to index.
+            </summary>
+            <example>
+            <code>
+                var filePaths = new FilePath[] { ".\\test.txt" };
+                GitAdd("c:/temp/cake", filePaths);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="filePaths">Path to file(s) to add.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitAddAll(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Add all file changes to index.
+            </summary>
+            <example>
+            <code>
+                GitAddAll("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitClone(Cake.Core.ICakeContext,System.String,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Clone unauthenticated using default options.
+            </summary>
+            <example>
+            <code>
+                GitClone("https://github.com/cake-build/cake.git", "c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="sourceUrl">URI for the remote repository.</param>
+            <param name="workDirectoryPath">Local path to clone into.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the arguments are null.</exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">If parent directory doesnt exist.</exception>
+            <exception cref="T:System.IO.IOException">If workDirectoryPath already exists.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitClone(Cake.Core.ICakeContext,System.String,Cake.Core.IO.DirectoryPath,Cake.Git.GitCloneSettings)">
+            <summary>
+            Clone unauthenticated using default options.
+            </summary>
+            <example>
+            <code>
+                GitClone("https://github.com/cake-build/cake.git", "c:/temp/cake", 
+                    new GitCloneSettings{ BranchName = "main" });
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="sourceUrl">URI for the remote repository.</param>
+            <param name="workDirectoryPath">Local path to clone into.</param>
+            <param name="cloneSettings">The clone settings.</param>
+            <returns>
+            The path to the created repository.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">If any of the arguments are null.</exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">If parent directory doesnt exist.</exception>
+            <exception cref="T:System.IO.IOException">If workDirectoryPath already exists.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitClone(Cake.Core.ICakeContext,System.String,Cake.Core.IO.DirectoryPath,System.String,System.String)">
+            <summary>
+            Clone authenticated using default options.
+            </summary>
+            <example>
+            <code>
+                GitClone("https://github.com/cake-build/cake.git", 
+                    "c:/temp/cake", 
+                    "username", 
+                    "password");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="sourceUrl">URI for the remote repository.</param>
+            <param name="workDirectoryPath">Local path to clone into.</param>
+            <param name="username">Username used for authentication.</param>
+            <param name="password">Password used for authentication.</param>
+            <exception cref="T:System.IO.DirectoryNotFoundException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <returns>The path to the created repository.</returns>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitClone(Cake.Core.ICakeContext,System.String,Cake.Core.IO.DirectoryPath,System.String,System.String,Cake.Git.GitCloneSettings)">
+            <summary>
+            Clone authenticated using default options.
+            </summary>
+            <example>
+            <code>
+                GitClone("https://github.com/cake-build/cake.git", 
+                    "c:/temp/cake", 
+                    "username", 
+                    "password",
+                    new GitCloneSettings{ BranchName = "main" });
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="sourceUrl">URI for the remote repository.</param>
+            <param name="workDirectoryPath">Local path to clone into.</param>
+            <param name="username">Username used for authentication.</param>
+            <param name="password">Password used for authentication.</param>
+            <param name="cloneSettings">The clone settings.</param>
+            <returns>
+            The path to the created repository.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+            </exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">Failed to find workDirectoryPath: {workFullDirectoryPath}</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitCommit(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.String,System.String)">
+            <summary>
+            Commit using default options.
+            </summary>
+            <example>
+            <code>
+                GitCommit("c:/temp/cake", "name", "email", "message");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="name">Name of committer.</param>
+            <param name="email">Email of committer.</param>
+            <param name="message">Commit message.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitDescribe(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Describe current branch.
+            </summary>
+            <example>
+            <code>
+            var result = GitDescribe(".");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <returns>Described commit using the most recent tag reachable from it.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitDescribe(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,Cake.Git.GitDescribeStrategy)">
+            <summary>
+            Describe current branch.
+            </summary>
+            <example>
+            <code>
+            var result = GitDescribe(".", GitDescribeStrategy.Tags);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="strategy">Describing strategy.</param>
+            <returns>Described commit using the most recent tag reachable from it.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitDescribe(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.Boolean,Cake.Git.GitDescribeStrategy)">
+            <summary>
+            Describe current branch.
+            </summary>
+            <example>
+            <code>
+            var result = GitDescribe(".", false, GitDescribeStrategy.Tags);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="renderLongFormat">
+              Always output the long format (the tag, the number of commits and the abbreviated commit name)
+              even when it matches a tag. This is useful when you want to see parts of the commit object name
+              in "describe" output, even when the commit in question happens to be a tagged version.
+              Instead of just emitting the tag name, it will describe such a commit as v1.2-0-gdeadbee
+              (0th commit since tag v1.2 that points at object deadbee...).
+            </param>
+            <param name="strategy">Describe strategy.</param>
+            <returns>Described commit using the most recent tag reachable from it.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitDescribe(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.Boolean,Cake.Git.GitDescribeStrategy,System.Nullable{System.Int32})">
+            <summary>
+            Describe current branch.
+            </summary>
+            <example>
+            <code>
+            var result = GitDescribe(".", false, GitDescribeStrategy.Tags, 0);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="renderLongFormat">
+              Always output the long format (the tag, the number of commits and the abbreviated commit name)
+              even when it matches a tag. This is useful when you want to see parts of the commit object name
+              in "describe" output, even when the commit in question happens to be a tagged version.
+              Instead of just emitting the tag name, it will describe such a commit as v1.2-0-gdeadbee
+              (0th commit since tag v1.2 that points at object deadbee...).
+            </param>
+            <param name="strategy">Describe strategy.</param>
+            <param name="minimumCommitIdAbbreviatedSize">Number of minimum hexadecimal digits used to render a uniquely abbreviated commit id.</param>
+            <returns>Described commit using the most recent tag reachable from it.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitDescribe(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.Boolean,Cake.Git.GitDescribeStrategy,System.Nullable{System.Int32})">
+            <summary>
+            Describe specified commit-ish.
+            </summary>
+            <example>
+            <code>
+            var result = GitDescribe(".", "master", false, GitDescribeStrategy.Tags, 0);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="commitishName">Commit-ish name.</param>
+            <param name="renderLongFormat">
+              Always output the long format (the tag, the number of commits and the abbreviated commit name)
+              even when it matches a tag. This is useful when you want to see parts of the commit object name
+              in "describe" output, even when the commit in question happens to be a tagged version.
+              Instead of just emitting the tag name, it will describe such a commit as v1.2-0-gdeadbee
+              (0th commit since tag v1.2 that points at object deadbee...).
+            </param>
+            <param name="strategy">Describe strategy.</param>
+            <param name="minimumCommitIdAbbreviatedSize">Number of minimum hexadecimal digits used to render a uniquely abbreviated commit id.</param>
+            <returns>Described commit using the most recent tag reachable from it.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitDiff(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Get changed files from inital commit id up to current.
+            </summary>
+            <example>
+            <code>
+                var result = GitDiff("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitDiff(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String)">
+            <summary>
+            Get changed files from certain commit id up to current.
+            </summary>
+            <example>
+            <code>
+                var result = GitDiff("c:/temp/cake", "since commit id");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="sinceCommitId">Commit id to start fetching from.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitDiff(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.String)">
+            <summary>
+            Get changed files from certain commit id up to current.
+            </summary>
+            <example>
+            <code>
+                var result = GitDiff("c:/temp/cake", "since commit id", "to commit id");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="sinceCommitId">Commit id to start fetching from.</param>
+            <param name="toCommitId">The commit id to compare to.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitInit(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Init using default options.
+            </summary>
+            <example>
+            <code>
+                var result = GitInit("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="initDirectoryPath">The path to the working folder when initializing a standard ".git" repository.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException">If any of the parameters are null.</exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException">If initDirectoryPath doesn't exist.</exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitLogTip(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Get last commit
+            </summary>
+            <example>
+            <code>
+                var result = GitLogTip("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitLog(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.Int32)">
+            <summary>
+            Get commit log.
+            </summary>
+            <example>
+            <code>
+                var result = GitLog("c:/temp/cake", 5);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="count">Number of commits to fetch.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitLog(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String)">
+            <summary>
+            Get commit from certain commit id up to current.
+            </summary>
+            <example>
+            <code>
+                var result = GitLog("c:/temp/cake", "since commit id");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="sinceCommitId">Commit id to start fetching from.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitLogLookup(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String)">
+            <summary>
+            Get specific commit.
+            </summary>
+            <example>
+            <code>
+                var result = GitLogLookup("c:/temp/cake", "commit id");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="commitId">Commit id to lookup.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitPull(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.String)">
+            <summary>
+            Pull unauthenticated using default options.
+            </summary>
+            <example>
+            <code>
+                var result = GitPull("c:/temp/cake", "name", "email");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Repository path.</param>
+            <param name="mergerName">The name of the merger.</param>
+            <param name="mergerEmail">The email of the merger.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitPull(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Pull authenticating using default options.
+            </summary>
+            <example>
+            <code>
+                var result = GitPull("c:/temp/cake", "name", "email", "username", "password", "remote");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Repository path.</param>
+            <param name="mergerName">The name of the merger.</param>
+            <param name="mergerEmail">The email of the merger.</param>
+            <param name="username">Username used for authentication.</param>
+            <param name="password">Password used for authentication.</param>
+            <param name="remoteName">Name of remote to pull from.</param>
+            <returns>The path to the created repository.</returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitPush(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath)">
+            <summary>
+            Push all branches unauthenticated.
+            </summary>
+            <example>
+            <code>
+                GitPush("c:/temp/cake");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Repository path.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitPush(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.String)">
+            <summary>
+            Push all branches authenticated.
+            </summary>
+            <example>
+            <code>
+                GitPush("c:/temp/cake", "username", "password");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Repository path.</param>
+            <param name="username">Username used for authentication.</param>
+            <param name="password">Password used for authentication.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitPush(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.String,System.String)">
+            <summary>
+            Push specific branch authenticated.
+            </summary>
+            <example>
+            <code>
+                GitPush("c:/temp/cake", "username", "password", "branch");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Repository path.</param>
+            <param name="username">Username used for authentication.</param>
+            <param name="password">Password used for authentication.</param>
+            <param name="branchName">Name of branch to push.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitPushRef(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.String)">
+            <summary>
+            Push a tag to a remote unauthenticated.
+            </summary>
+            <example>
+            <code>
+                GitPushRef("c:/temp/cake", "remote", "refSpec");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Repository path.</param>
+            <param name="remote">The <see cref="T:LibGit2Sharp.Remote"/> to push to.</param>
+            <param name="pushRefSpec">The pushRefSpec to push.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitPushRef(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.String,System.String,System.String)">
+            <summary>
+            Push a tag to a remote authenticated.
+            </summary>
+            <example>
+            <code>
+                GitPushRef("c:/temp/cake", "username", "password", "remote", "refSpec");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Repository path.</param>
+            <param name="username">Username used for authentication.</param>
+            <param name="password">Password used for authentication.</param>
+            <param name="remote">The <see cref="T:LibGit2Sharp.Remote"/> to push to.</param>
+            <param name="pushRefSpec">The pushRefSpec to push.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitTag(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String)">
+            <summary>
+            Applys tagName to repository.
+            </summary>
+            <example>
+            <code>
+                GitTag("c:/temp/cake", "tag name");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="tagName">The tag name.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitTag(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.String,System.String)">
+            <summary>
+            Applys tagName to repository.
+            </summary>
+            <example>
+            <code>
+                GitTag("c:/temp/cake", "tag name", "objectish");
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="tagName">The tag name.</param>
+            <param name="objectish">The revparse spec for the target object.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Cake.Git.GitAliases.GitRemove(Cake.Core.ICakeContext,Cake.Core.IO.DirectoryPath,System.Boolean,Cake.Core.IO.FilePath[])">
+            <summary>
+            Remove file(s) from index.
+            </summary>
+            <example>
+            <code>
+                var filePaths = new FilePath[] { ".\\test.txt" };
+                GitRemove("c:/temp/cake", true, filePaths);
+            </code>
+            </example>
+            <param name="context">The context.</param>
+            <param name="repositoryDirectoryPath">Path to repository.</param>
+            <param name="filePaths">Path to file(s) to remove.</param>
+            <param name="removeFromWorkingDirectory">True to remove the files from the working directory, False otherwise.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Cake.Git.GitBranch">
+            <summary>
+            Representation of a Git branch.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitBranch.CanonicalName">
+            <summary>
+            Gets the full name of the branch.
+            </summary>
+            <value>The full name of the branch.</value>
+        </member>
+        <member name="P:Cake.Git.GitBranch.FriendlyName">
+            <summary>
+            Gets the human-friendly name of the branch.
+            </summary>
+            <value>The human-friendly name of the branch.</value>
+        </member>
+        <member name="P:Cake.Git.GitBranch.Tip">
+            <summary>
+            Gets the commit this branch points to.
+            </summary>
+            <value>The commit this branch points to.</value>
+        </member>
+        <member name="P:Cake.Git.GitBranch.IsRemote">
+            <summary>
+            Gets a value indicating whether this branch is remote.
+            </summary>
+            <value>The a value indicating whether this branch is remote.</value>
+        </member>
+        <member name="P:Cake.Git.GitBranch.RemoteName">
+            <summary>
+            Gets the remote name for this branch.
+            </summary>
+            <value>The remote name for this branch.</value>
+        </member>
+        <member name="P:Cake.Git.GitBranch.Remotes">
+            <summary>
+            Gets or sets the remotes.
+            </summary>
+        </member>
+        <member name="M:Cake.Git.GitBranch.#ctor(LibGit2Sharp.Repository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Git.GitBranch"/> class.
+            </summary>
+            <param name="repository">The repository.</param>
+        </member>
+        <member name="M:Cake.Git.GitBranch.ToString">
+            <summary>
+            Generates a string representation of <see cref="T:Cake.Git.GitBranch"/>
+            </summary>
+            <returns><see cref="T:Cake.Git.GitBranch"/> as string</returns>
+        </member>
+        <member name="T:Cake.Git.GitChangeKind">
+            <summary>
+            The kind of changes that a Diff can report.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Unmodified">
+            <summary>
+            File is not modified.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Added">
+            <summary>
+            File is added.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Deleted">
+            <summary>
+            File is deleted.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Modified">
+            <summary>
+            File is modified.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Renamed">
+            <summary>
+            File is renamed.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Copied">
+            <summary>
+            File is copied.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Ignored">
+            <summary>
+            File is ignored.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Untracked">
+            <summary>
+            File is untracked.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.TypeChanged">
+            <summary>
+            File type changed.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Unreadable">
+            <summary>
+            File is unreadable.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitChangeKind.Conflicted">
+            <summary>
+            File is conflicting.
+            </summary>
+        </member>
+        <member name="T:Cake.Git.GitCloneSettings">
+            <summary>
+            Contains settings used by GitClone.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitCloneSettings.IsBare">
+            <summary>
+            True will result in a bare clone, false a full clone.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitCloneSettings.Checkout">
+            <summary>
+            If true, the origin's HEAD will be checked out. This only applies
+            to non-bare repositories.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitCloneSettings.BranchName">
+            <summary>
+            The name of the branch to checkout. When unspecified the
+            remote's default branch will be used instead.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitCloneSettings.RecurseSubmodules">
+            <summary>
+            Recursively clone submodules.
+            </summary>
+        </member>
+        <member name="T:Cake.Git.GitCommit">
+            <summary>
+            Representation of a Git commit.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitCommit.RootCommit">
+            <summary>
+            Commit Id for bare repository
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitCommit.Sha">
+            <summary>
+            Sha Id of commit.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitCommit.Author">
+            <summary>
+            Commit author.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitCommit.Committer">
+            <summary>
+            Commit comitter.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitCommit.Message">
+            <summary>
+            Commit message.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitCommit.MessageShort">
+            <summary>
+            Commit short message.
+            </summary>
+        </member>
+        <member name="M:Cake.Git.GitCommit.ToString">
+            <summary>
+            Generates a string representation of <see cref="T:Cake.Git.GitCommit"/>
+            </summary>
+            <returns><see cref="T:Cake.Git.GitCommit"/> as string</returns>
+        </member>
+        <member name="T:Cake.Git.GitDescribeStrategy">
+            <summary>
+            Specify the kind of committish which will be considered
+            when trying to identify the closest reference to the described commit.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitDescribeStrategy.Default">
+            <summary>
+            Only annotated tags will be considered as reference points
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitDescribeStrategy.Tags">
+            <summary>
+            Instead of using only the annotated tags, use any tag found
+            in refs/tags namespace. This option enables matching
+            a lightweight (non-annotated) tag.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitDescribeStrategy.All">
+            <summary>
+            Instead of using only the annotated tags, use any ref found in
+            refs/ namespace. This option enables matching any known branch,
+            remote-tracking branch, or lightweight tag.
+            </summary>
+        </member>
+        <member name="T:Cake.Git.GitDiffFile">
+            <summary>
+            Represents a Git diff file entry
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitDiffFile.Path">
+            <summary>
+            The new path.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitDiffFile.OldPath">
+            <summary>
+            The old path.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitDiffFile.Status">
+            <summary>
+            The kind of change that has been done (added, deleted, modified ...).
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitDiffFile.Exists">
+            <summary>
+            The file exists in the new side of the diff.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitDiffFile.OldExists">
+            <summary>
+            The file exists in the old side of the diff.
+            </summary>
+        </member>
+        <member name="M:Cake.Git.GitDiffFile.ToString">
+            <summary>
+            Generates a string representation of the <see cref="T:Cake.Git.GitDiffFile"/>
+            </summary>
+            <returns><see cref="T:Cake.Git.GitDiffFile"/> as string</returns>
+        </member>
+        <member name="T:Cake.Git.GitMergeResult">
+            <summary>
+            Git repository merge operation result
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitMergeResult.Commit">
+            <summary>
+            Merge commit.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitMergeResult.Status">
+            <summary>
+            Merge status
+            </summary>
+        </member>
+        <member name="T:Cake.Git.GitMergeStatus">
+            <summary>
+             The status of what happened as a result of a merge.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitMergeStatus.UpToDate">
+            <summary>
+            Repository was up to date
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitMergeStatus.FastForward">
+            <summary>
+            Repository was fast forward merged
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitMergeStatus.NonFastForward">
+            <summary>
+            Repository was not fast forward merged
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitMergeStatus.Conflicts">
+            <summary>
+            Repository encountered conflicts during merge
+            </summary>
+        </member>
+        <member name="T:Cake.Git.GitRemote">
+            <summary>
+            Representation of a Git remote.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitRemote.Name">
+            <summary>
+            Gets the Name.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitRemote.Url">
+            <summary>
+            Gets the url.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitRemote.PushUrl">
+            <summary>
+            Gets the push url.
+            </summary>
+        </member>
+        <member name="M:Cake.Git.GitRemote.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cake.Git.GitRemote"/> class.
+            </summary>
+            <param name="name">
+            The remote name.
+            </param>
+            <param name="pushUrl">
+            The push url.
+            </param>
+            <param name="url">
+            The url.
+            </param>
+        </member>
+        <member name="M:Cake.Git.GitRemote.ToString">
+            <summary>
+            Generates a string representation of <see cref="T:Cake.Git.GitRemote"/>
+            </summary>
+            <returns><see cref="T:Cake.Git.GitRemote"/> as string</returns>
+        </member>
+        <member name="T:Cake.Git.GitResetMode">
+            <summary>
+            The mode to be used when resetting the branch head 
+            and, optionally, the index and the working tree.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitResetMode.Hard">
+            <summary>
+            Resets the index and working tree. Any changes to tracked 
+            files in the working tree since the latest or specified commit are discarded.
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitResetMode.Soft">
+            <summary>
+            Resets the index but not the working tree (i.e., the changed files are 
+            preserved but not marked for commit).
+            </summary>
+        </member>
+        <member name="F:Cake.Git.GitResetMode.Mixed">
+            <summary>
+            Resets the index and working tree. Any changes to tracked files in the 
+            working tree since the latest or specified commit are discarded.
+            </summary>
+        </member>
+        <member name="T:Cake.Git.GitSignature">
+            <summary>
+            Git Commit Author / Committer.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitSignature.Email">
+            <summary>
+            Email address of author / committer.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitSignature.Name">
+            <summary>
+            Name of author / commiter.
+            </summary>
+        </member>
+        <member name="P:Cake.Git.GitSignature.When">
+            <summary>
+            When Committed / Authored
+            </summary>
+        </member>
+        <member name="M:Cake.Git.GitSignature.ToString">
+            <summary>
+            Generates a string representation of the <see cref="T:Cake.Git.GitSignature"/>
+            </summary>
+            <returns><see cref="T:Cake.Git.GitSignature"/> as string</returns>
+        </member>
+        <member name="T:Cake.Git.NamespaceDoc">
+            <summary>
+            This namespace contains GIT aliases.
+            </summary>
+        </member>
+    </members>
+</doc>

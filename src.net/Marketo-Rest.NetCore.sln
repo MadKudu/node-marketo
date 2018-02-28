@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketo-Rest.NetCore", "Marketo-Rest\Marketo-Rest.NetCore.csproj", "{F6CCD27F-8745-4AFA-A9E2-61E8501B7861}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Marketo-Rest.Tests.NetCore", "Marketo-Rest.Tests\Marketo-Rest.Tests.NetCore.csproj", "{A872E934-E482-4098-817D-17D7FD3480EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6CCD27F-8745-4AFA-A9E2-61E8501B7861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6CCD27F-8745-4AFA-A9E2-61E8501B7861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6CCD27F-8745-4AFA-A9E2-61E8501B7861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6CCD27F-8745-4AFA-A9E2-61E8501B7861}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A872E934-E482-4098-817D-17D7FD3480EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A872E934-E482-4098-817D-17D7FD3480EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A872E934-E482-4098-817D-17D7FD3480EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A872E934-E482-4098-817D-17D7FD3480EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27B0C616-3E9F-4690-87B6-7F223C1DCAB3}
+	EndGlobalSection
+EndGlobal

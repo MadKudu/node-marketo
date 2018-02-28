@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E59028F5-252A-4113-927D-63B78A891C48}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hootsuite</RootNamespace>
+    <AssemblyName>Hootsuite-Rest</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\GlobalAssemblyVersion.cs">
+      <Link>Properties\GlobalAssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="Api\InteractionHistory.cs" />
+    <Compile Include="Api\Messages.cs" />
+    <Compile Include="Api\Organizations.cs" />
+    <Compile Include="Api\Owly.cs" />
+    <Compile Include="Api\Scim.cs" />
+    <Compile Include="Api\SocialProfiles.cs" />
+    <Compile Include="Api\Teams.cs" />
+    <Compile Include="Domain\EventMessage.cs" />
+    <Compile Include="Domain\Location.cs" />
+    <Compile Include="Domain\Media.cs" />
+    <Compile Include="Domain\MediaUrl.cs" />
+    <Compile Include="Domain\Member.cs" />
+    <Compile Include="Domain\Message.cs" />
+    <Compile Include="Domain\MessageState.cs" />
+    <Compile Include="Domain\Organization.cs" />
+    <Compile Include="Domain\Reviewer.cs" />
+    <Compile Include="Domain\SocialProfile.cs" />
+    <Compile Include="HootsuiteException.cs" />
+    <Compile Include="Require\Backoff.cs" />
+    <Compile Include="Require\config.cs" />
+    <Compile Include="Require\Restler.cs" />
+    <Compile Include="ConnectionOwly.cs" />
+    <Compile Include="errors.cs" />
+    <Compile Include="HootsuiteClient.cs" />
+    <Compile Include="Require\RestlerOperationException.cs" />
+    <Compile Include="Retry.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="dyn.cs" />
+    <Compile Include="util.cs" />
+    <Compile Include="Api\Me.cs" />
+    <Compile Include="Api\Media.cs" />
+    <Compile Include="Api\Members.cs" />
+    <Compile Include="Connection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Marketo-Rest.project.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
