@@ -2,7 +2,9 @@
 /.idea/
 *.iml
 test/helper/config.bk.js
+
 package-lock.json
+*.project.lock.json
 
 coverage
 

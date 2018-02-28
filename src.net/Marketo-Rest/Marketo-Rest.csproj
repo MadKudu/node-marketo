@@ -56,38 +56,25 @@
     <Compile Include="..\GlobalAssemblyVersion.cs">
       <Link>Properties\GlobalAssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="Api\InteractionHistory.cs" />
-    <Compile Include="Api\Messages.cs" />
-    <Compile Include="Api\Organizations.cs" />
-    <Compile Include="Api\Owly.cs" />
-    <Compile Include="Api\Scim.cs" />
-    <Compile Include="Api\SocialProfiles.cs" />
-    <Compile Include="Api\Teams.cs" />
-    <Compile Include="Domain\EventMessage.cs" />
-    <Compile Include="Domain\Location.cs" />
-    <Compile Include="Domain\Media.cs" />
-    <Compile Include="Domain\MediaUrl.cs" />
-    <Compile Include="Domain\Member.cs" />
-    <Compile Include="Domain\Message.cs" />
-    <Compile Include="Domain\MessageState.cs" />
-    <Compile Include="Domain\Organization.cs" />
-    <Compile Include="Domain\Reviewer.cs" />
-    <Compile Include="Domain\SocialProfile.cs" />
-    <Compile Include="HootsuiteException.cs" />
+    <Compile Include="Api\Activities.cs" />
+    <Compile Include="Api\BulkActivityExtract.cs" />
+    <Compile Include="Api\BulkLeadExtract.cs" />
+    <Compile Include="Api\Campaign.cs" />
+    <Compile Include="Api\Email.cs" />
+    <Compile Include="Api\LandingPage.cs" />
+    <Compile Include="Api\Lead.cs" />
+    <Compile Include="Api\List.cs" />
+    <Compile Include="Api\Stats.cs" />
+    <Compile Include="MarketoClient.cs" />
+    <Compile Include="MarketoException.cs" />
     <Compile Include="Require\Backoff.cs" />
     <Compile Include="Require\config.cs" />
     <Compile Include="Require\Restler.cs" />
-    <Compile Include="ConnectionOwly.cs" />
     <Compile Include="errors.cs" />
-    <Compile Include="HootsuiteClient.cs" />
     <Compile Include="Require\RestlerOperationException.cs" />
     <Compile Include="Retry.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="dyn.cs" />
     <Compile Include="util.cs" />
-    <Compile Include="Api\Me.cs" />
-    <Compile Include="Api\Media.cs" />
-    <Compile Include="Api\Members.cs" />
     <Compile Include="Connection.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Marketo-Rest.project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Marketo-Rest.NetCore.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
