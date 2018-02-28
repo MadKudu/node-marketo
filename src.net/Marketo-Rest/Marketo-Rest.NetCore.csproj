@@ -1,8 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net45;netcoreapp2.0</TargetFrameworks>
+    <AssemblyName>Marketo-Rest</AssemblyName>
+    <RootNamespace>Marketo</RootNamespace>
+    <PackageLicenseUrl>http://choosealicense.com/licenses/mit/</PackageLicenseUrl>
+    <PackageId>Marketo-Rest</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>Various</Authors>
+    <Company>BclEx</Company>
+    <Product>Marketo-Rest</Product>
+    <Description>A Hootsuite wrapper for direct interaction with their APIs.</Description>
+    <Copyright>Copyright © 2017</Copyright>
+    <PackageProjectUrl>https://github.com/MadKudu/node-marketo</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MadKudu/node-marketo</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
     <VersionPrefix>0.0.1</VersionPrefix>
-    <VersionSuffix>src.net-0</VersionSuffix>
+    <VersionSuffix></VersionSuffix>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
