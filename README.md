@@ -79,8 +79,7 @@ marketo.list.getLeads(1)
 Instead of getting data back inside of the promise, you can also turn the response into a stream by using the `Marketo.streamify` function. This will emit the results one element at a time. If the result is paginated, it will lazily load all of the pages until it's done:
 
 ```js
-// Wraping the resulting promise
-var resultStream = Marketo.streamify(marketo.list.getLeads(1))
+return marketo.streamify('lead', 'getLeads', [ 1 ])
 
 resultStream
   .on('data', function(lead) {
@@ -93,8 +92,6 @@ resultStream
     // end of the stream
   });
 ```
-
-Since the data is lazily loaded, you can stop the stream and will not incur additional API calls:
 
 ```js
 var count = 0;
@@ -119,9 +116,9 @@ Bulk Extract provides a programmatic interface for retrieving large amounts of a
 
 The process requires you to `bulkLeadExtract.create` a request, then `bulkLeadExtract.enqueue` the request, then poll the `bulkLeadExtract.status`, `bulkLeadExtract.statusTilCompleted` will poll till completed, also while calling `bulkLeadExtract.cancel` for any errors.
 
-The `bulkLeadExtract.get` method will preform these all these actions for you. 
+The `bulkLeadExtract.get` method will preform these all these actions for you.
 
-Then `bulkLeadExtract.file` or `bulkLeadExtract.fileStream` can be used to access the extracted file. 
+Then `bulkLeadExtract.file` or `bulkLeadExtract.fileStream` can be used to access the extracted file.
 
 
 ```js
