@@ -29,6 +29,8 @@ namespace Marketo
             set { _tokenData = dyn.hasProp(_options, "accessToken") ? dyn.ToJObject(new { access_token = value }) : null; }
         }
 
+        public Action<Connection> OnAccessToken { get; set; }
+
         public Task<dynamic> get(string url, dynamic options = null, string contentType = null) => _request(url, null, options, Restler.Method.GET, contentType);
         public Task<dynamic> post(string url, dynamic options = null, string contentType = null) => _request(url, null, options, Restler.Method.POST, contentType);
         public Task<dynamic> put(string url, dynamic options = null, string contentType = null) => _request(url, null, options, Restler.Method.PUT, contentType);
@@ -116,6 +118,7 @@ namespace Marketo
 
                         _log($"Got token: {data}");
                         _tokenData = data;
+                        OnAccessToken?.Invoke(this);
                         return data;
                     }
                     catch (Exception err) { _log($"GetOAuthToken failed: {err}"); throw err; }
