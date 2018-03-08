@@ -25,7 +25,7 @@ namespace Marketo.Require
             HEAD,
         }
 
-        public async Task<object> request(string url, dynamic options, Method method = Method.GET, string contentType = null)
+        public async Task<object> request(string url, dynamic options, Method method = Method.GET, string contentType = null, Action<HttpResponseMessage, string> onResponse = null)
         {
             var uri = new Uri(url);
             // query
@@ -52,9 +52,8 @@ namespace Marketo.Require
             try
             {
                 var res = await _client.SendAsync(req, new CancellationTokenSource(timeout).Token);
-                //Console.WriteLine(res);
                 var body = await res.Content.ReadAsStringAsync();
-                //Console.WriteLine(body);
+                onResponse?.Invoke(res, body);
                 var r = res.Content.Headers.ContentType.MediaType == "application/json" ? (object)JObject.Parse(body) : body;
                 if (!res.IsSuccessStatusCode)
                     throw new RestlerOperationException(res.StatusCode, r);
@@ -63,32 +62,32 @@ namespace Marketo.Require
             catch (TaskCanceledException) { throw new RestlerOperationException(0, null) { Timedout = true }; }
         }
 
-        public async Task<object> get(string url, dynamic options) => await request(url, options, Method.GET);
-        public async Task<object> patch(string url, dynamic options) => await request(url, options, Method.PATCH);
-        public async Task<object> post(string url, dynamic options) => await request(url, options, Method.POST);
-        public async Task<object> put(string url, dynamic options) => await request(url, options, Method.PUT);
-        public async Task<object> del(string url, dynamic options) => await request(url, options, Method.DELETE);
-        public async Task<object> head(string url, dynamic options) => await request(url, options, Method.HEAD);
-        public async Task<object> json(string url, object data, dynamic options, Method method = Method.GET, Func<string, string> fixup = null)
+        public async Task<object> get(string url, dynamic options, Action<HttpResponseMessage, string> onResponse = null) => await request(url, options, Method.GET, onResponse: onResponse);
+        public async Task<object> patch(string url, dynamic options, Action<HttpResponseMessage, string> onResponse = null) => await request(url, options, Method.PATCH, onResponse: onResponse);
+        public async Task<object> post(string url, dynamic options, Action<HttpResponseMessage, string> onResponse = null) => await request(url, options, Method.POST, onResponse: onResponse);
+        public async Task<object> put(string url, dynamic options, Action<HttpResponseMessage, string> onResponse = null) => await request(url, options, Method.PUT, onResponse: onResponse);
+        public async Task<object> del(string url, dynamic options, Action<HttpResponseMessage, string> onResponse = null) => await request(url, options, Method.DELETE, onResponse: onResponse);
+        public async Task<object> head(string url, dynamic options, Action<HttpResponseMessage, string> onResponse = null) => await request(url, options, Method.HEAD, onResponse: onResponse);
+        public async Task<object> json(string url, object data, dynamic options, Method method = Method.GET, Action<HttpResponseMessage, string> onResponse = null, Func<string, string> fixup = null)
         {
             var dataAsJson = JsonConvert.SerializeObject(data, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             if (fixup != null) dataAsJson = fixup(dataAsJson);
             options = dyn.exp(options);
             options.data = dataAsJson;
-            return await request(url, options, method, "application/json");
+            return await request(url, options, method, "application/json", onResponse: onResponse);
         }
-        public async Task<object> postJson(string url, object data, dynamic options, Func<string, string> fixup = null) => await json(url, data, options, Method.POST, fixup);
-        public async Task<object> putJson(string url, object data, dynamic options, Func<string, string> fixup = null) => await json(url, data, options, Method.PUT, fixup);
-        public async Task<object> patchJson(string url, object data, dynamic options, Func<string, string> fixup = null) => await json(url, data, options, Method.PATCH, fixup);
+        public async Task<object> postJson(string url, object data, dynamic options, Action<HttpResponseMessage, string> onResponse = null, Func<string, string> fixup = null) => await json(url, data, options, Method.POST, onResponse: onResponse, fixup: fixup);
+        public async Task<object> putJson(string url, object data, dynamic options, Action<HttpResponseMessage, string> onResponse = null, Func<string, string> fixup = null) => await json(url, data, options, Method.PUT, onResponse: onResponse, fixup: fixup);
+        public async Task<object> patchJson(string url, object data, dynamic options, Action<HttpResponseMessage, string> onResponse = null, Func<string, string> fixup = null) => await json(url, data, options, Method.PATCH, onResponse: onResponse, fixup: fixup);
 
         public static string GetQuery(string path, object s)
         {
             var parameters = dyn.getDataAsString(s).Select(a =>
-                {
-                    try { return string.Format("{0}={1}", Uri.EscapeDataString(a.Key), Uri.EscapeDataString(a.Value)); }
-                    catch (Exception ex) { throw new InvalidOperationException(string.Format("Failed when processing '{0}'.", a), ex); }
-                })
-                .Aggregate((a, b) => (string.IsNullOrEmpty(a) ? b : string.Format("{0}&{1}", a, b)));
+            {
+                try { return string.Format("{0}={1}", Uri.EscapeDataString(a.Key), Uri.EscapeDataString(a.Value)); }
+                catch (Exception ex) { throw new InvalidOperationException(string.Format("Failed when processing '{0}'.", a), ex); }
+            })
+            .Aggregate((a, b) => (string.IsNullOrEmpty(a) ? b : string.Format("{0}&{1}", a, b)));
             return path != null ? string.Format("{0}?{1}", path, parameters) : parameters;
         }
     }

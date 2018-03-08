@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -30,6 +31,7 @@ namespace Marketo
         }
 
         public Action<Connection> OnAccessToken { get; set; }
+        public Action<Connection> OnResponse { get; set; }
 
         public Task<dynamic> get(string url, dynamic options = null, string contentType = null) => _request(url, null, options, Restler.Method.GET, contentType);
         public Task<dynamic> post(string url, dynamic options = null, string contentType = null) => _request(url, null, options, Restler.Method.POST, contentType);
@@ -59,7 +61,7 @@ namespace Marketo
                     options.headers.Authorization = $"Bearer {token["access_token"]}";
                     try
                     {
-                        var d = data == null ? (JObject)await _rest.request(url, options, method, contentType) : await _rest.json(url, data, options, method, null);
+                        var d = data == null ? (JObject)await _rest.request(url, options, method, contentType, (Action<HttpResponseMessage, string>)onResponse) : await _rest.json(url, data, options, method, (Action<HttpResponseMessage, string>)onResponse);
                         if (d["errors"] != null)
                         {
                             _log($"Request failed: {d}");
@@ -92,6 +94,11 @@ namespace Marketo
             };
             Func<bool, Task<JObject>> requestFn2 = async (forceOAuth) => await requestFn(GetOAuthToken(forceOAuth));
             return await _retry.start(requestFn2);
+
+            void onResponse(HttpResponseMessage res, string body)
+            {
+                OnResponse?.Invoke(this);
+            }
         }
 
         private async Task<JObject> GetOAuthToken(bool force = false)

@@ -40,6 +40,12 @@ namespace Marketo
             set => _connection.OnAccessToken = value;
         }
 
+        public Action<Connection> OnResponse
+        {
+            get => _connection.OnResponse;
+            set => _connection.OnResponse = value;
+        }
+
         public static Action<string> Logger
         {
             get => util.logger;
