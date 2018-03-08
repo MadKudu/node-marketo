@@ -1,7 +1,9 @@
 ﻿using Marketo.Require;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Net;
+using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,11 +13,20 @@ namespace Marketo
     public class Connection
     {
         internal static readonly Regex HttpTestExp = new Regex(@"^https?://", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        readonly ApiUsage _lastApiUsage = new ApiUsage();
         readonly Action<string> _log = util.logger;
         readonly Restler _rest = new Restler();
         readonly dynamic _options;
         readonly Retry _retry;
         JObject _tokenData;
+
+        public class ApiUsage
+        {
+            public string Quota { get; set; }
+            public int? QuotaUsed { get; set; }
+        }
+
+        public ApiUsage LastApiUsage => _lastApiUsage;
 
         public Connection(dynamic options)
         {
@@ -97,6 +108,9 @@ namespace Marketo
 
             void onResponse(HttpResponseMessage res, string body)
             {
+                var headers = res.Headers;
+                _lastApiUsage.Quota = headers.TryGetValues("X-Account-Quota", out IEnumerable<string> values) ? values.FirstOrDefault() : null;
+                _lastApiUsage.QuotaUsed = headers.TryGetValues("X-Account-Quota-Used", out values) ? (int?)int.Parse(values.FirstOrDefault()) : null;
                 OnResponse?.Invoke(this);
             }
         }
