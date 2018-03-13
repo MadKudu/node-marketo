@@ -9,17 +9,17 @@ namespace Marketo
         internal MarketoException(string message)
             : this(HttpStatusCode.OK, null, -1, message) { }
         internal MarketoException(HttpStatusCode statusCode, JToken errors)
-            : this(statusCode, (string)errors["requestId"], (int)errors[0]["code"], (string)errors[0]["message"]) { }
-        internal MarketoException(HttpStatusCode statusCode, string requestId, int code, string message)
+            : this(statusCode, (string)errors[0]["id"], (int)errors[0]["code"], (string)errors[0]["message"]) { }
+        internal MarketoException(HttpStatusCode statusCode, string id, int code, string message)
             : base(message)
         {
             StatusCode = statusCode;
-            RequestId = requestId;
+            Id = id;
             Code = code;
         }
 
         public HttpStatusCode StatusCode { get; set; }
-        public string RequestId { get; set; }
+        public string Id { get; set; }
         public int Code { get; set; }
     }
 

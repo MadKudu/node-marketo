@@ -42,7 +42,7 @@ namespace Marketo
         static bool hasPlatformErrorCode(Exception err, int code)
         {
             return isPlatformError(err, out JArray errors) &&
-                errors.FirstOrDefault(x => (int)x["code"] == code) != null;
+                errors.FirstOrDefault(x => (string)x["code"] == code.ToString()) != null;
         }
 
         static bool isPlatformError(Exception err, out JArray errors)

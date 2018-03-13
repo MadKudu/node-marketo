@@ -31,7 +31,7 @@ namespace Marketo
         public Connection(dynamic options)
         {
             _options = options ?? new { };
-            _tokenData = dyn.hasProp(_options, "accessToken") ? dyn.ToJObject(new { access_token = dyn.getProp<string>(_options, "accessToken") }) : null;
+            _tokenData = !string.IsNullOrEmpty(dyn.getProp<string>(_options, "accessToken")) ? dyn.ToJObject(new { access_token = dyn.getProp<string>(_options, "accessToken") }) : null;
             _retry = new Retry(dyn.getProp(_options, "retry", new { }));
         }
 
@@ -59,7 +59,9 @@ namespace Marketo
             options = dyn.exp(options, true);
             if (!HttpTestExp.IsMatch(url))
             {
-                var baseUrl = dyn.getProp(_options, "url", config.api_url);
+                var baseUrl = dyn.getProp<string>(_options, "endpoint");
+                if (string.IsNullOrEmpty(baseUrl))
+                    throw new ArgumentNullException("options.endpoint");
                 url = baseUrl + url;
             }
             _log($"Request: {url}");
@@ -82,7 +84,6 @@ namespace Marketo
                     }
                     catch (RestlerOperationException res)
                     {
-
                         var err = (JObject)res.Content;
                         if (err != null && err["errors"] != null) { _log($"Request failed: {err}"); throw; }
                         else
@@ -131,12 +132,13 @@ namespace Marketo
                         },
                         timeout = dyn.getProp(_options, "timeout", 20000),
                     };
-                    var baseUrl = dyn.getProp(_options, "url", config.api_url);
+                    var baseUrl = dyn.getProp<string>(_options, "endpoint");
+                    if (string.IsNullOrEmpty(baseUrl))
+                        throw new ArgumentNullException("options.endpoint");
                     try
                     {
-                        var x = await _rest.post($"{baseUrl}/oauth/token", options);
+                        var x = await _rest.post($"{baseUrl.Replace("/rest", "/identity")}/oauth/token", options);
                         var data = (JObject)x;
-
                         _log($"Got token: {data}");
                         _tokenData = data;
                         OnAccessToken?.Invoke(this);

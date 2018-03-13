@@ -56,7 +56,6 @@ namespace Marketo
                             new MarketoSecurityException(e.StatusCode, ((JObject)e.Content)["errors"]) :
                             new MarketoException(e.StatusCode, ((JObject)e.Content)["errors"]);
                     promise.SetException(err);
-                    throw err;
                 }
             }
             return promise.Task;

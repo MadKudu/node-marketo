@@ -54,7 +54,7 @@ namespace Marketo.Api
                 if (data.result[0].status == "Queued" || data.result[0].status == "Processing")
                     throw new MarketoException(null)
                     {
-                        RequestId = data["requestId"],
+                        Id = data["requestId"],
                         Code = 606
                     };
                 return data;

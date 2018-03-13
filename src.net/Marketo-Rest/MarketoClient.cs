@@ -1,4 +1,6 @@
 ﻿using Marketo.Api;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 
 namespace Marketo
@@ -51,5 +53,14 @@ namespace Marketo
             get => util.logger;
             set => util.logger = value;
         }
+
+        internal static JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
+        {
+            MissingMemberHandling = MissingMemberHandling.Ignore,
+            NullValueHandling = NullValueHandling.Ignore,
+            DateParseHandling = DateParseHandling.None,
+            Formatting = Formatting.Indented,
+            ContractResolver = new CamelCasePropertyNamesContractResolver { NamingStrategy = new CamelCaseNamingStrategy() }
+        };
     }
 }

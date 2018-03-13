@@ -59,7 +59,7 @@ namespace Marketo.Require
                     throw new RestlerOperationException(res.StatusCode, r);
                 return r;
             }
-            catch (TaskCanceledException) { throw new RestlerOperationException(0, null) { Timedout = true }; }
+            catch (TaskCanceledException e) { throw new RestlerOperationException(0, "Operation Timed Out") { Timedout = true, E = e }; }
         }
 
         public async Task<object> get(string url, dynamic options, Action<HttpResponseMessage, string> onResponse = null) => await request(url, options, Method.GET, onResponse: onResponse);

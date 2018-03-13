@@ -66,6 +66,8 @@
     <Compile Include="Api\Lead.cs" />
     <Compile Include="Api\List.cs" />
     <Compile Include="Api\Stats.cs" />
+    <Compile Include="Domain\Activity.cs" />
+    <Compile Include="Domain\ActivityType.cs" />
     <Compile Include="MarketoClient.cs" />
     <Compile Include="MarketoException.cs" />
     <Compile Include="Require\Backoff.cs" />
