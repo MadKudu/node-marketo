@@ -16,11 +16,30 @@ namespace Marketo
     public class Connection
     {
         internal static readonly Regex HttpTestExp = new Regex(@"^https?://", RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        readonly LastResponseState _lastResponse = new LastResponseState();
         readonly Action<string> _log = util.logger;
         readonly Restler _rest = new Restler();
         readonly dynamic _options;
         readonly Retry _retry;
         JObject _tokenData;
+
+        /// <summary>
+        /// Class LastResponseState.
+        /// </summary>
+        public class LastResponseState
+        {
+            /// <summary>
+            /// Gets or sets the date.
+            /// </summary>
+            /// <value>The date.</value>
+            public DateTime? Date { get; set; }
+        }
+
+        /// <summary>
+        /// Gets the last response.
+        /// </summary>
+        /// <value>The last response.</value>
+        public LastResponseState LastResponse => _lastResponse;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Connection"/> class.
@@ -182,6 +201,8 @@ namespace Marketo
 
             void onResponse(HttpResponseMessage res, string body)
             {
+                var headers = res.Headers;
+                //_lastResponse.Date = headers.TryGetValues("X-Account-Quota", out IEnumerable<string> values) ? values.FirstOrDefault() : null;
                 OnResponse?.Invoke(this);
             }
         }
