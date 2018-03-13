@@ -80,7 +80,7 @@ namespace Marketo.Api
                 activityDate = x.ActivityDate.ToString("o"),
                 activityTypeId = x.ActivityTypeId,
                 primaryAttributeValue = x.PrimaryAttribute,
-                attributes = x.Attributes.Select(y => new
+                attributes = x.Attributes?.Select(y => new
                 {
                     name = y.Name,
                     value = y.Value,
