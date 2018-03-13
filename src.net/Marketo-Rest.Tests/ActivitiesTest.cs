@@ -12,7 +12,7 @@ namespace Marketo.Tests
         public async Task Activities_ListActivityTypes()
         {
             // lists activity types
-            var resp = await marketo.Activities.GetActivityTypes();
+            var resp = await marketo.Activities.GetAllTypes();
             var activity = resp.result[0];
             Assert.AreEqual(1, (int)activity.id);
             Assert.AreEqual("Visit Webpage", (string)activity.name);

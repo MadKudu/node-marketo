@@ -51,10 +51,10 @@ namespace Marketo
                         return;
                     }
                     var e = (err as RestlerOperationException);
-                    if (e != null && e.Content != null && e.Content is JObject && ((JObject)e.Content)["errors"] != null)
+                    if (e != null && e.Content != null && e.Content is JObject && ((JObject)e.Content)["errors"] is JArray)
                         err = e.StatusCode == HttpStatusCode.Unauthorized || e.StatusCode == HttpStatusCode.Forbidden ?
-                            new MarketoSecurityException(e.StatusCode, ((JObject)e.Content)["errors"]) :
-                            new MarketoException(e.StatusCode, ((JObject)e.Content)["errors"]);
+                            new MarketoSecurityException(e.StatusCode, (JArray)((JObject)e.Content)["errors"]) :
+                            new MarketoException(e.StatusCode, (JArray)((JObject)e.Content)["errors"]);
                     promise.SetException(err);
                 }
             }

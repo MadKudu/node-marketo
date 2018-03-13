@@ -47,6 +47,12 @@ namespace Marketo
 
         static bool isPlatformError(Exception err, out JArray errors)
         {
+            if (err is MarketoException)
+            {
+                errors = ((MarketoException)err).Errors;
+                return true;
+            }
+            // other error
             errors = null;
             JObject res;
             if (!(err is RestlerOperationException) || (res = ((RestlerOperationException)err).Content as JObject) == null)
