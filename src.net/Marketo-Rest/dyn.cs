@@ -7,8 +7,17 @@ using System.Reflection;
 
 namespace Marketo
 {
+    /// <summary>
+    /// Class dyn.
+    /// </summary>
     public static class dyn
     {
+        /// <summary>
+        /// Determines whether the specified s has property.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <param name="name">The name.</param>
+        /// <returns><c>true</c> if the specified s has property; otherwise, <c>false</c>.</returns>
         public static bool hasProp(object s, string name)
         {
             if (s == null) return false;
@@ -17,6 +26,14 @@ namespace Marketo
             return s.GetType().GetProperty(name) != null;
         }
 
+        /// <summary>
+        /// Gets the property.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="s">The s.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="default_">The default.</param>
+        /// <returns>T.</returns>
         public static T getProp<T>(object s, string name, T default_ = default(T))
         {
             if (s == null) return default_;
@@ -34,21 +51,42 @@ namespace Marketo
             return prop != null ? (T)prop.GetValue(s) : default_;
         }
 
+        /// <summary>
+        /// Clones the specified options.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>System.Object.</returns>
         public static object clone(object options)
         {
             return getData(options).ToDictionary(x => x.Key, x => x.Value);
         }
 
+        /// <summary>
+        /// Picks the specified options.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <param name="keys">The keys.</param>
+        /// <returns>System.Object.</returns>
         public static object pick(object options, string[] keys)
         {
             return keys.ToDictionary(x => x, x => getProp<object>(options, x));
         }
 
+        /// <summary>
+        /// To the j object.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <returns>JObject.</returns>
         public static JObject ToJObject(object s)
         {
             return JObject.Parse(JsonConvert.SerializeObject(s));
         }
 
+        /// <summary>
+        /// Gets the data.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <returns>IEnumerable&lt;KeyValuePair&lt;System.String, System.Object&gt;&gt;.</returns>
         public static IEnumerable<KeyValuePair<string, object>> getData(object s)
         {
             if (s is ExpandoObject)
@@ -67,6 +105,11 @@ namespace Marketo
                 .ToList();
         }
 
+        /// <summary>
+        /// Gets the data as string.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <returns>IEnumerable&lt;KeyValuePair&lt;System.String, System.String&gt;&gt;.</returns>
         public static IEnumerable<KeyValuePair<string, string>> getDataAsString(object s)
         {
             if (s is ExpandoObject)
@@ -85,12 +128,26 @@ namespace Marketo
                 .ToList();
         }
 
+        /// <summary>
+        /// Gets the object.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="default_">The default.</param>
+        /// <param name="emptyIfNull">if set to <c>true</c> [empty if null].</param>
+        /// <returns>System.Object.</returns>
         public static object getObj(object s, string name, object default_ = null, bool emptyIfNull = true)
         {
             var r = getProp(s, name, default_);
             return exp(r, emptyIfNull);
         }
 
+        /// <summary>
+        /// Exps the specified s.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <param name="emptyIfNull">if set to <c>true</c> [empty if null].</param>
+        /// <returns>System.Object.</returns>
         public static object exp(object s, bool emptyIfNull = false)
         {
             if (s == null) return emptyIfNull ? new ExpandedObject(null) : null;

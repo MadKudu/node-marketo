@@ -5,23 +5,43 @@ using System.Threading.Tasks;
 
 namespace Marketo.Api
 {
+    /// <summary>
+    /// Class Activities.
+    /// </summary>
     public class Activities
     {
         readonly MarketoClient _marketo;
         readonly Connection _connection;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Activities"/> class.
+        /// </summary>
+        /// <param name="marketo">The marketo.</param>
+        /// <param name="connection">The connection.</param>
         public Activities(MarketoClient marketo, Connection connection)
         {
             _marketo = marketo;
             _connection = connection;
         }
 
+        /// <summary>
+        /// Gets all types.
+        /// </summary>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
         public Task<dynamic> GetAllTypes(dynamic options = null)
         {
             var path = util.createPath("activities", "types.json");
             return _connection.get(path, options);
         }
 
+        /// <summary>
+        /// Adds the range.
+        /// </summary>
+        /// <param name="activity">The activity.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
+        /// <exception cref="ArgumentNullException">activity</exception>
         public Task<dynamic> AddRange(dynamic[] activity, dynamic options = null)
         {
             if (activity == null)
@@ -42,6 +62,13 @@ namespace Marketo.Api
             return _connection.postJson(path, data, options);
         }
 
+        /// <summary>
+        /// Adds the range.
+        /// </summary>
+        /// <param name="activity">The activity.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
+        /// <exception cref="ArgumentNullException">activity</exception>
         public Task<dynamic> AddRange(Activity[] activity, dynamic options = null)
         {
             if (activity == null)

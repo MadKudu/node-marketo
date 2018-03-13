@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 namespace Marketo.Api
 {
+    /// <summary>
+    /// Class BulkLeadExtract.
+    /// </summary>
     public class BulkLeadExtract
     {
         readonly Action<string> _log = util.logger;
@@ -11,6 +14,11 @@ namespace Marketo.Api
         readonly Connection _connection;
         readonly Retry _retry;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BulkLeadExtract"/> class.
+        /// </summary>
+        /// <param name="marketo">The marketo.</param>
+        /// <param name="connection">The connection.</param>
         public BulkLeadExtract(MarketoClient marketo, Connection connection)
         {
             _marketo = marketo;
@@ -18,6 +26,13 @@ namespace Marketo.Api
             _retry = new Retry(new { maxRetries = 10, initialDelay = 30000, maxDelay = 60000 });
         }
 
+        /// <summary>
+        /// Creates the specified fields.
+        /// </summary>
+        /// <param name="fields">The fields.</param>
+        /// <param name="filter">The filter.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
         public Task<dynamic> Create(string[] fields, dynamic filter, dynamic options = null)
         {
             var path = util.createBulkPath("leads", "export", "create.json");
@@ -27,18 +42,36 @@ namespace Marketo.Api
             return _connection.postJson(path, options);
         }
 
+        /// <summary>
+        /// Enqueues the specified export identifier.
+        /// </summary>
+        /// <param name="exportId">The export identifier.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
         public Task<dynamic> Enqueue(string exportId, dynamic options = null)
         {
             var path = util.createPath("leads", "export", exportId, "enqueue.json");
             return _connection.post(path, new { data = options });
         }
 
+        /// <summary>
+        /// Statuses the specified export identifier.
+        /// </summary>
+        /// <param name="exportId">The export identifier.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
         public Task<dynamic> Status(string exportId, dynamic options = null)
         {
             var path = util.createPath("leads", "export", exportId, "status.json");
             return _connection.get(path, new { data = options });
         }
 
+        /// <summary>
+        /// Statuses the til completed.
+        /// </summary>
+        /// <param name="exportId">The export identifier.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
         public async Task<dynamic> StatusTilCompleted(string exportId, dynamic options = null)
         {
             Func<bool, Task<JObject>> requestFn = async (forceOAuth) =>
@@ -62,12 +95,26 @@ namespace Marketo.Api
             return await _retry.start(requestFn);
         }
 
+        /// <summary>
+        /// Cancels the specified export identifier.
+        /// </summary>
+        /// <param name="exportId">The export identifier.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
         public Task<dynamic> Cancel(string exportId, dynamic options = null)
         {
             var path = util.createPath("leads", "export", exportId, "cancel.json");
             return _connection.post(path, new { data = options });
         }
 
+        /// <summary>
+        /// Gets the specified filter.
+        /// </summary>
+        /// <param name="filter">The filter.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
+        /// <exception cref="MarketoException">
+        /// </exception>
         public async Task<dynamic> Get(dynamic filter, dynamic options = null)
         {
             var data = await Create(filter, options);
@@ -93,6 +140,12 @@ namespace Marketo.Api
             return data;
         }
 
+        /// <summary>
+        /// Files the specified export identifier.
+        /// </summary>
+        /// <param name="exportId">The export identifier.</param>
+        /// <param name="options">The options.</param>
+        /// <returns>Task&lt;dynamic&gt;.</returns>
         public Task<dynamic> File(string exportId, dynamic options = null)
         {
             var path = util.createPath("leads", "export", exportId, "file.json");
