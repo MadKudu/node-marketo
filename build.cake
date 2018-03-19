@@ -10,7 +10,7 @@ var testProject = File("./src.net/Marketo-Rest.Tests/Marketo-Rest.Tests.NetCore.
 var projects = new[] { mainProject, testProject };
 var artifactsDirectory = Directory("./_artifacts");
 var revision = AppVeyor.IsRunningOnAppVeyor ? AppVeyor.Environment.Build.Number : 0;
-var version = AppVeyor.IsRunningOnAppVeyor ? new Version(AppVeyor.Environment.Build.Version.Split('-')[0]).ToString(3) : "0.0.1";
+var version = AppVeyor.IsRunningOnAppVeyor ? new Version(AppVeyor.Environment.Build.Version.Split('-')[0]).ToString(3) : "0.0.2";
 var globalAssemblyInfo = File("./src.net/GlobalAssemblyVersion.cs");
 
 var generatedVersion = "";
