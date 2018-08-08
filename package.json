@@ -1,6 +1,6 @@
 {
   "name": "node-marketo-rest",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "marketo rest client",
   "repository": {
     "type": "git",
@@ -14,15 +14,15 @@
     "testRecord": "REPLAY=record mocha -t 10000 test/*test.js --exit"
   },
   "dependencies": {
-    "backoff": "2.4.x",
-    "bluebird": "2.3.x",
-    "bunyan": "1.0.x",
-    "lodash": "2.4.x",
-    "moment": "2.20.x",
+    "backoff": "2.5.x",
+    "bluebird": "3.5.x",
+    "bunyan": "1.8.x",
+    "lodash": "4.17.x",
+    "moment": "2.22.x",
     "restler": "3.4.x"
   },
   "devDependencies": {
-    "mocha": "5.0.x",
-    "replay": "2.1.x"
+    "mocha": "5.2.x",
+    "replay": "2.3.x"
   }
 }
