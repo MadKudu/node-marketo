@@ -120,7 +120,7 @@ The `bulkLeadExtract.get` method will preform these all these actions for you.
 
 Then `bulkLeadExtract.file` or `bulkLeadExtract.fileStream` can be used to access the extracted file.
 
-
+Bulk Extract Leads
 ```js
 marketo.bulkLeadExtract.get(
   ['firstName', 'lastName', 'id', 'email'],
@@ -133,6 +133,32 @@ marketo.bulkLeadExtract.get(
   .then(function(file) {
     // do something with file
   });
+```
+
+####Bulk Activity Extract
+Follow the same convention as bulk extracting leads, but provide different filter information for the start/end date, activity type ids and any other supported filters or parameters. [Marketo Docs] (http://developers.marketo.com/rest-api/bulk-extract/bulk-activity-extract/)
+
+
+```
+marketo.bulkActivityExtract.get(
+        {createdAt: {
+                startAt: '2018-07-01T23:59:59-00:00',
+                endAt:  '2018-07-03T23:59:59-00:00'
+            },
+            activityTypeIds: [
+                1, //example types
+                12,
+                13
+            ]})
+        .then(function(data) {
+            // export is ready
+            let exportId = data.result[0].exportId;
+            return marketo.bulkActivityExtract.file(exportId);
+        })
+        .then(function(file) {
+            //Do something with file
+        });
+});
 ```
 
 
