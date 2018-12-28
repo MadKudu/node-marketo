@@ -1,6 +1,6 @@
 {
   "name": "node-marketo-rest",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "marketo rest client",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     "backoff": "2.4.x",
     "bluebird": "2.3.x",
     "bunyan": "1.0.x",
-    "lodash": "2.4.x",
+    "lodash": "4.17.x",
     "moment": "2.20.x",
     "restler": "3.4.x"
   },
