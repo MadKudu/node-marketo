@@ -4,7 +4,7 @@ var assert = require('assert'),
 
 describe('Activities', function() {
   describe('list activity types', function() {
-  	it('lists activity types', function(done){
+  	it('lists activity types', function(done) {
       marketo.activities.getActivityTypes().then(function(resp) {
         var activity = resp.result[0];
         assert.equal(activity.id, 1);
