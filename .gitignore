@@ -1,5 +1,6 @@
 /node_modules/
 /.idea/
+/.history
 *.iml
 test/helper/config.bk.js
 package-lock.json
