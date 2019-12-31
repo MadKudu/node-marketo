@@ -10,15 +10,15 @@
     "node": ">=4.8.5"
   },
   "scripts": {
-    "test": "mocha test/*test.js --exit",
+    "test": "mocha test/*.test.js",
     "testRecord": "REPLAY=record mocha -t 10000 test/*test.js --exit"
   },
   "dependencies": {
     "backoff": "2.4.x",
     "bluebird": "2.3.x",
     "bunyan": "1.0.x",
-    "lodash": "4.17.x",
-    "moment": "2.20.x",
+    "lodash": "4.17.15",
+    "moment": "2.24.0",
     "restler": "3.4.x"
   },
   "devDependencies": {

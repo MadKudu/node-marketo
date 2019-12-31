@@ -3,6 +3,8 @@ var _ = require('lodash'),
     Promise = require('bluebird'),
     assert = require('assert');
 
+console.log(Marketo);
+
 function getMarketoResult(count, hasNext, opt_isError) {
   var result = {result: _.range(count)};
 
