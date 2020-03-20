@@ -1,30 +1,30 @@
 {
   "name": "node-marketo-rest",
-  "version": "0.7.8",
+  "version": "1.0.0-beta-1",
   "description": "marketo rest client",
   "repository": {
     "type": "git",
     "url": "https://github.com/MadKudu/node-marketo/"
   },
   "engines": {
-    "node": ">=4.8.5"
+    "node": ">=10.16.3"
   },
   "scripts": {
     "test": "mocha test/*.test.js",
     "testRecord": "REPLAY=record mocha -t 10000 test/*test.js --exit"
   },
   "dependencies": {
-    "backoff": "2.4.x",
-    "bluebird": "2.3.x",
-    "bunyan": "1.0.x",
+    "backoff": "2.5.x",
+    "bluebird": "3.7.x",
+    "bunyan": "1.8.x",
     "lodash": "4.17.15",
     "moment": "2.24.0",
     "restler": "3.4.x"
   },
   "devDependencies": {
-    "mocha": "5.0.x",
-    "nock": "^11.7.0",
-    "replay": "2.1.x",
-    "rewire": "^4.0.1"
+    "mocha": "7.1.x",
+    "nock": "^12.0.3",
+    "replay": "2.4.x",
+    "rewire": "^5.0.0"
   }
 }
