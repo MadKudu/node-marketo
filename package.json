@@ -14,7 +14,7 @@
     "testRecord": "REPLAY=record mocha -t 10000 test/*test.js --exit"
   },
   "dependencies": {
-    "backoff": "2.4.x",
+    "backoff": "2.5.0",
     "bluebird": "2.3.x",
     "bunyan": "1.0.x",
     "lodash": "4.17.15",
