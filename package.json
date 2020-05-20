@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "backoff": "2.4.x",
-    "bluebird": "2.3.x",
+    "bluebird": "2.11.0",
     "bunyan": "1.0.x",
     "lodash": "4.17.15",
     "moment": "2.24.0",
