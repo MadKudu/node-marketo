@@ -17,7 +17,7 @@
     "backoff": "2.4.x",
     "bluebird": "2.3.x",
     "bunyan": "1.0.x",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "moment": "2.24.0",
     "restler": "3.4.x"
   },
