@@ -114,9 +114,9 @@ resultStream
 
 Bulk Extract provides a programmatic interface for retrieving large amounts of activity data out of Marketo.  For cases which do not require low latency, and need to transfer significant volumes of activity data out of Marketo, such as CRM-integration, ETL, data warehousing, and data archiving.
 
-The process requires you to `bulkLeadExtract.create` a request, then `bulkLeadExtract.enqueue` the request, then poll the `bulkLeadExtract.status`, `bulkLeadExtract.statusTilCompleted` will poll till completed, also while calling `bulkLeadExtract.cancel` for any errors.
+The process requires you to `bulkLeadExtract.create` a request, then `bulkLeadExtract.enqueue` the request, then poll the `bulkLeadExtract.status`, `bulkLeadExtract.statusTillCompleted` will poll till completed, also while calling `bulkLeadExtract.cancel` for any errors.
 
-The `bulkLeadExtract.get` method will preform these all these actions for you.
+The `bulkLeadExtract.get` method will preform all these actions for you.
 
 Then `bulkLeadExtract.file` or `bulkLeadExtract.fileStream` can be used to access the extracted file.
 

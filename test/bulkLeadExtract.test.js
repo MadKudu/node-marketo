@@ -55,13 +55,13 @@ describe('Bulk Lead Extract', function () {
   });
 
   if (hasReplay)
-    describe('#statusTilCompleted', function () {
+    describe('#statusTillCompleted', function () {
       it('checks the status of an extract till complete', function (done) {
         this.timeout(60000 * 10);
         createRequest().then(function (res) {
           let exportId = res.result[0].exportId;
           marketo.bulkLeadExtract.enqueue(exportId).then(function (res) {
-            marketo.bulkLeadExtract.statusTilCompleted(exportId).then(function (response) {
+            marketo.bulkLeadExtract.statusTillCompleted(exportId).then(function (response) {
               assert.equal(response.result.length, 1);
               assert.equal(response.result[0].status, 'Completed');
               done();
