@@ -22,6 +22,7 @@
     "restler": "3.4.x"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
     "mocha": "5.0.x",
     "nock": "^11.7.0",
     "replay": "2.1.x",
