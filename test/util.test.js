@@ -17,27 +17,4 @@ describe('util', () => {
       expect(path).to.equal('/../bulk/v1/activities/export/create.json');
     });
   });
-
-  describe('getFileStream', () => {
-    it('should get file stream correctly', async () => {
-      const endpoint = 'https://www.marketo.com';
-      const token = 'token';
-      const dataMock = 'file stream';
-
-      nock(endpoint)
-        .get('/')
-        .reply(200, dataMock);
-      
-      const fileStream = await getFileStream(endpoint, 'activities', '123-567-', token);
-      
-      let data = '';
-      fileStream
-        .on('data', (chunk) => {
-          data += chunk;
-        })
-        .on('end', () => {
-          expect(data).to.equal(dataMock);
-        });
-    });
-  });
 });

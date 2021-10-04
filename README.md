@@ -135,6 +135,33 @@ marketo.bulkLeadExtract.get(
   });
 ```
 
+You can get the bulk `bulkLeadExtract.file` but this is not recommended as it will load all the file in-memory.
+
+The recommended way to get the file is by using `bulkLeadExtract.fileStream`. This will retrieve the file using a stream of chunked content (by default 750 KB).
+
+The `bulkLeadExtract.fileStream` accepts three parameters:
+
+1. exportId: The same parameter passed to `bulkLeadExtract.file`;
+2. fileSize: required in order to know when to stop the stream;
+3. rangeSize: optional if you want to override the default 750 KB range size (in bytes).
+
+Here is an example:
+
+```js
+const {
+  result: [{ exportId, fileSize }],
+} = await client.bulkLeadExtract.get(
+  ['firstName', 'lastName', 'id', 'email'],
+  { staticListName: 'some list name' }
+);
+
+const fileStream = await client.bulkLeadExtract.fileStream(
+  exportId,
+  fileSize,
+  1000000
+);
+```
+
 ####Bulk Activity Extract
 Follow the same convention as bulk extracting leads, but provide different filter information for the start/end date, activity type ids and any other supported filters or parameters. [Marketo Docs] (http://developers.marketo.com/rest-api/bulk-extract/bulk-activity-extract/)
 
