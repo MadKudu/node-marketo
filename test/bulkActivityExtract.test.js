@@ -114,4 +114,15 @@ describe('Bulk Activity Extract', function () {
       // }).catch(done);
     });
   });
+
+  describe('#getActivityTypes', function () {
+    it('gets activity types', function (done) {
+      this.timeout(60000 * 10);
+      marketo.bulkActivityExtract.getActivityTypes().then(function (response) {
+          assert.equal(response.success, true);
+          assert.notEqual(response.result, 0);
+          done();
+        }).catch(done);
+    });
+  });
 });
