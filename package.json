@@ -14,18 +14,18 @@
     "testRecord": "REPLAY=record mocha -t 10000 test/*test.js --exit"
   },
   "dependencies": {
-    "backoff": "2.4.x",
-    "bluebird": "2.3.x",
-    "bunyan": "1.0.x",
-    "lodash": "4.17.15",
-    "moment": "2.24.0",
+    "backoff": "^2.5.0",
+    "bluebird": "^2.4.3",
+    "bunyan": "^1.8.15",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "restler": "3.4.x"
   },
   "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "5.0.x",
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2",
     "nock": "^11.7.0",
-    "replay": "2.1.x",
-    "rewire": "^4.0.1"
+    "replay": "^2.1.4",
+    "rewire": "^6.0.0"
   }
 }
