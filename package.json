@@ -1,13 +1,13 @@
 {
   "name": "node-marketo-rest",
-  "version": "0.11.1",
+  "version": "0.12.0",
   "description": "marketo rest client",
   "repository": {
     "type": "git",
     "url": "https://github.com/MadKudu/node-marketo/"
   },
   "engines": {
-    "node": ">=4.8.5"
+    "node": ">=14.17.6"
   },
   "scripts": {
     "test": "mocha test/*.test.js",
