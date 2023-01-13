@@ -15,10 +15,12 @@ function getMarketoResult(count, hasNext, opt_isError) {
 
   if (opt_isError) {
     result.success = false;
-    result.errors = [{
-      message: 'error',
-      code: '605'
-    }];
+    result.errors = [
+      {
+        message: 'error',
+        code: '605',
+      },
+    ];
   } else {
     result.success = true;
   }
@@ -29,7 +31,6 @@ function getMarketoResult(count, hasNext, opt_isError) {
     return Promise.resolve(result);
   }
 }
-
 
 describe.skip('Stream', function () {
   it('streams normal result without pagination', function (done) {

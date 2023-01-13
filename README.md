@@ -21,28 +21,27 @@ var marketo = new Marketo({
   endpoint: 'https://123-ABC-456.mktorest.com/rest',
   identity: 'https://123-ABC-456.mktorest.com/identity',
   clientId: 'client id',
-  clientSecret: 'client secret'
+  clientSecret: 'client secret',
 });
 
-marketo.lead.find('id', [2, 3])
-  .then(function(data, resp) {
-    // data is:
-    // {
-    //   requestId: '17787#149c01d54b8',
-    //   result: [{
-    //     id: 2,
-    //     updatedAt: '2014-11-13 15:25:36',
-    //     createdAt: '2014-11-13 15:25:36',
-    //     ...
-    //   }, {
-    //     id: 3,
-    //     updatedAt: '2014-11-13 16:22:03',
-    //     createdAt: '2014-11-13 16:22:03',
-    //     ...
-    //   }],
-    //   success: true
-    // }
-  });
+marketo.lead.find('id', [2, 3]).then(function (data, resp) {
+  // data is:
+  // {
+  //   requestId: '17787#149c01d54b8',
+  //   result: [{
+  //     id: 2,
+  //     updatedAt: '2014-11-13 15:25:36',
+  //     createdAt: '2014-11-13 15:25:36',
+  //     ...
+  //   }, {
+  //     id: 3,
+  //     updatedAt: '2014-11-13 16:22:03',
+  //     createdAt: '2014-11-13 16:22:03',
+  //     ...
+  //   }],
+  //   success: true
+  // }
+});
 ```
 
 ### Pagination
@@ -50,26 +49,26 @@ marketo.lead.find('id', [2, 3])
 When a specific call results in a lot of elements, you will have to paginate to get all of the data. For example, getting all the leads in a large list will likely exceed the maximum batch size of 300. When this happens, you can check for the existence of the `nextPageToken` and use it in the next call:
 
 ```js
-marketo.list.getLeads(1)
-  .then(function(data) {
-    if (data.nextPageToken) {
-      // preserve the nextPageToken for use in the next call
-    }
-  });
+marketo.list.getLeads(1).then(function (data) {
+  if (data.nextPageToken) {
+    // preserve the nextPageToken for use in the next call
+  }
+});
 ```
 
 If you want a less manual process, the result comes with a convenient `nextPage` function that you can use. This function only exists if there's additional data:
 
 ```js
-marketo.list.getLeads(1)
-  .then(function(page1) {
+marketo.list
+  .getLeads(1)
+  .then(function (page1) {
     // do something with page1
 
     if (page1.nextPageToken) {
       return page1.nextPage();
     }
   })
-  .then(function(page2) {
+  .then(function (page2) {
     // do something with page2
   });
 ```
@@ -79,16 +78,16 @@ marketo.list.getLeads(1)
 Instead of getting data back inside of the promise, you can also turn the response into a stream by using the `Marketo.streamify` function. This will emit the results one element at a time. If the result is paginated, it will lazily load all of the pages until it's done:
 
 ```js
-return marketo.streamify('lead', 'getLeads', [ 1 ])
+return marketo.streamify('lead', 'getLeads', [1]);
 
 resultStream
-  .on('data', function(lead) {
+  .on('data', function (lead) {
     // do something with lead
   })
-  .on('error', function(err) {
+  .on('error', function (err) {
     // log the list error. Note, the stream closes if it encounters an error
   })
-  .on('end', function() {
+  .on('end', function () {
     // end of the stream
   });
 ```
@@ -97,14 +96,14 @@ resultStream
 var count = 0;
 
 resultStream
-  .on('data', function(data) {
+  .on('data', function (data) {
     if (++count > 20) {
       // Closing stream, this CAN be called multiple times because the
       // buffer of the queue may already contain additional data
       resultStream.endMarketoStream();
     }
   })
-  .on('end', function() {
+  .on('end', function () {
     // count here CAN be more than 20
     console.log('done, count is', count);
   });
@@ -112,7 +111,7 @@ resultStream
 
 ### Extract
 
-Bulk Extract provides a programmatic interface for retrieving large amounts of activity data out of Marketo.  For cases which do not require low latency, and need to transfer significant volumes of activity data out of Marketo, such as CRM-integration, ETL, data warehousing, and data archiving.
+Bulk Extract provides a programmatic interface for retrieving large amounts of activity data out of Marketo. For cases which do not require low latency, and need to transfer significant volumes of activity data out of Marketo, such as CRM-integration, ETL, data warehousing, and data archiving.
 
 The process requires you to `bulkLeadExtract.create` a request, then `bulkLeadExtract.enqueue` the request, then poll the `bulkLeadExtract.status`, `bulkLeadExtract.statusTillCompleted` will poll till completed, also while calling `bulkLeadExtract.cancel` for any errors.
 
@@ -121,16 +120,18 @@ The `bulkLeadExtract.get` method will preform all these actions for you.
 Then `bulkLeadExtract.file` or `bulkLeadExtract.fileStream` can be used to access the extracted file.
 
 Bulk Extract Leads
+
 ```js
-marketo.bulkLeadExtract.get(
-  ['firstName', 'lastName', 'id', 'email'],
-  { staticListName: 'some list name' })
-  .then(function(data) {
+marketo.bulkLeadExtract
+  .get(['firstName', 'lastName', 'id', 'email'], {
+    staticListName: 'some list name',
+  })
+  .then(function (data) {
     // export is ready
     let exportId = data.result[0].exportId;
     return marketo.bulkLeadExtract.file(exportId);
   })
-  .then(function(file) {
+  .then(function (file) {
     // do something with file
   });
 ```
@@ -150,10 +151,9 @@ Here is an example:
 ```js
 const {
   result: [{ exportId, fileSize }],
-} = await client.bulkLeadExtract.get(
-  ['firstName', 'lastName', 'id', 'email'],
-  { staticListName: 'some list name' }
-);
+} = await client.bulkLeadExtract.get(['firstName', 'lastName', 'id', 'email'], {
+  staticListName: 'some list name',
+});
 
 const fileStream = await client.bulkLeadExtract.fileStream(
   exportId,
@@ -164,7 +164,6 @@ const fileStream = await client.bulkLeadExtract.fileStream(
 
 ####Bulk Activity Extract
 Follow the same convention as bulk extracting leads, but provide different filter information for the start/end date, activity type ids and any other supported filters or parameters. [Marketo Docs] (http://developers.marketo.com/rest-api/bulk-extract/bulk-activity-extract/)
-
 
 ```
 marketo.bulkActivityExtract.get(
@@ -187,7 +186,6 @@ marketo.bulkActivityExtract.get(
         });
 });
 ```
-
 
 # Test
 
@@ -228,11 +226,11 @@ We are using mocha to run the test, you can run a single test so that you
 generate only the needed data. To do so, you append `only` to a test:
 
 ```js
-    // on a single unit test
-    it.only('test description', function() {})
+// on a single unit test
+it.only('test description', function () {});
 
-    // or an entire describe
-    describe.only('test description', function() {})
+// or an entire describe
+describe.only('test description', function () {});
 ```
 
 One more thing to note is that once we've processed the raw data, `node-replay`

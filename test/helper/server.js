@@ -2,14 +2,14 @@ var _ = require('lodash'),
   util = require('util'),
   http = require('http');
 
-
 function writeResponse(res, statusCode, data) {
   data = JSON.stringify(data);
   res.writeHead(statusCode, {
     'Content-Lenght': data.length,
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   });
-  res.write(data); res.end();
+  res.write(data);
+  res.end();
 }
 
 function TestServer() {
@@ -57,9 +57,9 @@ TestServer.prototype = {
         errors: [
           {
             message: 'Error message',
-            code: req.headers['marketo-error-code']
-          }
-        ]
+            code: req.headers['marketo-error-code'],
+          },
+        ],
       };
       writeResponse(res, 200, data);
       return;
@@ -84,15 +84,20 @@ TestServer.prototype = {
 
   // Get the count of all urls that match the regex
   countPattern: function (regex) {
-    const counts = this.counts()
-    return _.reduce(_.keys(counts), function (sum, k) {
-      if (k.match(regex)) {
-        return sum + counts[k];
-      }
+    const counts = this.counts();
+    return _.reduce(
+      _.keys(counts),
+      function (sum, k) {
+        if (k.match(regex)) {
+          return sum + counts[k];
+        }
 
-      return sum;
-    }, 0, this);
-  }
+        return sum;
+      },
+      0,
+      this
+    );
+  },
 };
 
 module.exports = {
@@ -100,5 +105,5 @@ module.exports = {
     var server = new TestServer();
     server.listen(next);
     return server;
-  }
+  },
 };

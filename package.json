@@ -11,6 +11,8 @@
   },
   "scripts": {
     "test": "mocha test/*.test.js",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
     "testRecord": "REPLAY=record mocha -t 10000 test/*test.js --exit"
   },
   "dependencies": {
@@ -25,6 +27,7 @@
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
     "nock": "^13.3.0",
+    "prettier": "^2.8.2",
     "replay": "^2.4.0",
     "rewire": "^6.0.0"
   }
