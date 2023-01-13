@@ -82,7 +82,7 @@ describe('Bulk Activity Extract', function () {
   });
 
   if (hasReplay)
-    describe.only('#get', function () {
+    describe('#get', function () {
       it('coordinates an extract until completed', function (done) {
         this.timeout(60000 * 10);
         marketo.bulkActivityExtract.get({ createdAt: { startAt: moment(), endAt: moment() } }).then(function (response) {

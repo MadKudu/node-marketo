@@ -36,18 +36,6 @@ describe('Leads', function () {
               console.log('done, count is', count);
               done();
             });
-          //marketo.lead.getActivities([11696898],[3,11,13],response.nextPageToken)
-          //    .then(function(page1) {
-          //      // do something with page1
-          //      console.log('DATA!!!', page1);
-          //      if (page1.nextPageToken) {
-          //        return page1.nextPage();
-          //      }
-          //    })
-          //    .then(function(page2) {
-          //      // do something with page2
-          //      console.log('DATA!!!', page2);
-          //    });
         }).catch(done);
     });
   });

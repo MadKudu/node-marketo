@@ -1,0 +1,14 @@
+GET /rest/asset/v1/smartList/1.json
+accept: application/json, text/plain, */*
+content-type: application/json
+accept-encoding: gzip, compress, deflate, br
+body: {\"data\":{\"includeRules\":true,\"_method\":\"GET\"}}
+
+HTTP/1.1 200 OK
+server: nginx
+date: Fri, 13 Jan 2023 15:56:30 GMT
+content-type: application/json;charset=UTF-8
+transfer-encoding: chunked
+connection: close
+
+{"requestId":"c135#185abd8cd51","success":true,"warnings":[],"result":[{"name": "list1", "workspace": "workspace1"}]}
