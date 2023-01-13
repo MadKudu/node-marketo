@@ -1,15 +1,14 @@
 POST /rest/../bulk/v1/leads/export/create.json
-accept: */*
-host: 123-abc-456.mktorest.com
-accept-encoding: gzip, deflate
+accept: application/json, text/plain, */*
 content-type: application/json
+accept-encoding: gzip, compress, deflate, br
 body: {\"fields\":[\"firstName\",\"lastName\",\"id\",\"email\"],\"filter\":{\"staticListName\":\"prova\"}}
 
 HTTP/1.1 200 OK
 server: nginx
-date: Tue, 27 Feb 2018 20:12:13 GMT
+date: Sat, 7 Jan 2023 00:00:00 GMT
 content-type: application/json;charset=UTF-8
 content-length: 179
 connection: close
 
-{"requestId":"f435#161d8e4df24","result":[{"exportId":"3fadb012-5810-40ba-a5ca-56300ecf10d4","format":"CSV","status":"Created","createdAt":"2018-02-27T20:12:13Z"}],"success":true}
+{"requestId":"f435#161d8e4df24","result":[{"exportId":"3fadb012-5810-40ba-a5ca-56300ecf10d4","format":"CSV","status":"Created","createdAt":"2023-01-07T00:00:00Z"}],"success":true}

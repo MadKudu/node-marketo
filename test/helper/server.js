@@ -1,6 +1,6 @@
 var _ = require('lodash'),
-    util = require('util'),
-    http = require('http');
+  util = require('util'),
+  http = require('http');
 
 
 function writeResponse(res, statusCode, data) {
@@ -18,11 +18,11 @@ function TestServer() {
 }
 
 TestServer.prototype = {
-  listen: function(cb) {
+  listen: function (cb) {
     this._server.listen(0, 'localhost', cb);
   },
 
-  http: function() {
+  http: function () {
     return this._server;
   },
 
@@ -32,7 +32,7 @@ TestServer.prototype = {
   // need for that.
   _handler: function testServer(req, res) {
     var statusCode = 200,
-        data = {};
+      data = {};
 
     this._counter[req.url] = (this._counter[req.url] || 0) + 1;
 
@@ -67,32 +67,31 @@ TestServer.prototype = {
 
     // Set an arbitrary delay until the server responds, by default there is
     // no delay.
-    setTimeout(function() {
+    setTimeout(function () {
       writeResponse(res, 200, data);
     }, req.headers['delay'] || 0);
   },
 
   // Gets all the counts of all the URLs hit
-  counts: function() {
+  counts: function () {
     return _.cloneDeep(this._counter);
   },
 
   // Get the count of a specific path
-  count: function(k) {
+  count: function (k) {
     return this._counter[k] || 0;
   },
 
   // Get the count of all urls that match the regex
-  countPattern: function(regex) {
-    return _.reduce(_.keys(this._counter), function(sum, k) {
+  countPattern: function (regex) {
+    const counts = this.counts()
+    return _.reduce(_.keys(counts), function (sum, k) {
       if (k.match(regex)) {
-        return sum + this._counter[k];
+        return sum + counts[k];
       }
 
       return sum;
     }, 0, this);
-
-    return this._counter[key] || 0;
   }
 };
 

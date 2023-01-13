@@ -1,12 +1,12 @@
 var _ = require('lodash'),
-    env = process.env,
-    defaults = {
-      endpoint: 'https://123-ABC-456.mktorest.com/rest',
-      identity: 'https://123-ABC-456.mktorest.com/identity',
-      clientId: 'someId',
-      clientSecret: 'someSecret'
-    },
-    credentials;
+  env = process.env,
+  defaults = {
+    endpoint: 'https://123-ABC-456.mktorest.com/rest',
+    identity: 'https://123-ABC-456.mktorest.com/identity',
+    clientId: 'someId',
+    clientSecret: 'someSecret'
+  },
+  credentials;
 
 credentials = {
   endpoint: env.MARKETO_ENDPOINT || defaults.endpoint,

@@ -1,15 +1,13 @@
 GET /rest/v1/activities/types.json
-accept: */*
-host: 123-abc-456.mktorest.com
-accept-encoding: gzip, deflate
-authorization: Bearer bda399e0-a68e-4d9b-bc2f-aa2657746b06:ablakjsdlaskjdfl
+accept: application/json, text/plain, */*
+accept-encoding: gzip, compress, deflate, br
 
-200 HTTP/1.1
+HTTP/1.1 200 OK
 server: nginx
-date: Wed, 19 Nov 2014 21:36:58 GMT
+date: Wed, 28 Dec 2022 17:49:24 GMT
 content-type: application/json;charset=UTF-8
-content-length: 522
-connection: keep-alive
-set-cookie: BIGipServerab-restapi_https=571015434.47873.0000; path=/
+transfer-encoding: chunked
+connection: close
+vary: Accept-Encoding
 
 {"requestId":"1296e#1564d2f98e5","result":[{"id":1,"name":"Visit Webpage","description":"User visits a web page","primaryAttribute":{"name":"Webpage ID","dataType":"integer"},"attributes":[{"name":"Client IP Address","dataType":"string"},{"name":"Query Parameters","dataType":"string"},{"name":"Referrer URL","dataType":"string"},{"name":"Search Engine","dataType":"string"},{"name":"Search Query","dataType":"string"},{"name":"User Agent","dataType":"string"},{"name":"Webpage URL","dataType":"string"}]}],"success":true}

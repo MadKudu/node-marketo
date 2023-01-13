@@ -4,7 +4,7 @@ var assert = require('assert'),
   marketo = require('./helper/connection');
 
 let hasReplay = false;
-let createRequest = () => marketo.bulkActivityExtract.create({ createdAt: { startAt: moment(), endAt: moment() } });
+let createRequest = () => marketo.bulkActivityExtract.create({ createdAt: { startAt: moment.utc('2023-01-07'), endAt: moment.utc('2023-01-08') } });
 let cancelRequest = (res, done) => marketo.bulkActivityExtract.cancel(res.result[0].exportId).then(() => done()).catch(done);
 
 describe('Bulk Activity Extract', function () {
@@ -82,7 +82,7 @@ describe('Bulk Activity Extract', function () {
   });
 
   if (hasReplay)
-    describe('#get', function () {
+    describe.only('#get', function () {
       it('coordinates an extract until completed', function (done) {
         this.timeout(60000 * 10);
         marketo.bulkActivityExtract.get({ createdAt: { startAt: moment(), endAt: moment() } }).then(function (response) {

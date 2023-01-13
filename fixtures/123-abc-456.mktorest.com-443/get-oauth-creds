@@ -1,16 +1,17 @@
 GET /identity/oauth/token?grant_type=client_credentials&client_id=someId&client_secret=someSecret
-accept: */*
-host: 123-abc-456.mktorest.com
-accept-encoding: gzip, deflate
+accept: application/json, text/plain, */*
+accept-encoding: gzip, compress, deflate, br
 
-200 HTTP/1.1
+HTTP/1.1 200 200
 server: nginx
-date: Wed, 19 Nov 2014 21:36:57 GMT
+date: Wed, 28 Dec 2022 17:06:24 GMT
 content-type: application/json;charset=UTF-8
 transfer-encoding: chunked
-connection: keep-alive
+connection: close
 cache-control: no-store
 pragma: no-cache
-set-cookie: BIGipServerab-restapi_https=587792650.47873.0000; path=/
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+x-content-type-options: nosniff
 
 {"access_token":"foobar","token_type":"bearer","expires_in":516,"scope":"ak+marketoapiuser@usermind.com"}

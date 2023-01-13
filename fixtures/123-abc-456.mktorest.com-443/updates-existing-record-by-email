@@ -1,8 +1,7 @@
 POST /rest/v1/leads.json
-accept: */*
-host: 123-abc-456.mktorest.com
-accept-encoding: gzip, deflate
+accept: application/json, text/plain, */*
 content-type: application/json
+accept-encoding: gzip, compress, deflate, br
 body: {\"lookupField\":\"email\",\"input\":[{\"email\":\"ak+marketo1@usermind.com\"}]}
 
 200 HTTP/1.1
