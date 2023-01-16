@@ -1,4 +1,4 @@
-GET /bulk/v1/leads/export/3fadb012-5810-40ba-a5ca-56300ecf10d4/status.json
+GET /bulk/v1/activities/export/7220a628-3d79-4ab9-9e25-5b2a2108b249/status.json
 accept: application/json, text/plain, */*
 content-type: application/json
 accept-encoding: gzip, compress, deflate, br
@@ -11,4 +11,4 @@ content-type: application/json;charset=UTF-8
 content-length: 179
 connection: close
 
-{"requestId":"d6e9#161d8e4dfff","result":[{"exportId":"3fadb012-5810-40ba-a5ca-56300ecf10d4","format":"CSV","status":"Created","createdAt":"2023-01-07T00:00:00Z"}],"success":true}
+{"requestId":"9cc7#161d8e4be24","result":[{"exportId":"7220a628-3d79-4ab9-9e25-5b2a2108b249","format":"CSV","status":"Created","createdAt":"2023-01-07T00:00:00Z"}],"success":true}

@@ -1,8 +1,8 @@
-DELETE /rest/v1/lists/1001/leads.json?id=42
-accept: */*
-host: 123-abc-456.mktorest.com
-accept-encoding: gzip, deflate
-authorization: Bearer bda399e0-a68e-4d9b-bc2f-aa2657746b06:ablakjsdlaskjdfl
+DELETE /rest/v1/lists/1001/leads.json
+accept: application/json, text/plain, */*
+content-type: application/json
+accept-encoding: gzip, compress, deflate, br
+body: {\"query\":{\"id\":\"42\"},\"headers\":{\"Content-Type\":\"application/json\"}}
 
 200 HTTP/1.1
 server: nginx

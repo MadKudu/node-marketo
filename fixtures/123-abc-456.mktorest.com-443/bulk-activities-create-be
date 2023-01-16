@@ -1,15 +1,14 @@
 POST /rest/../bulk/v1/activities/export/create.json
-accept: */*
-host: 123-abc-456.mktorest.com
-accept-encoding: gzip, deflate
+accept: application/json, text/plain, */*
 content-type: application/json
-body: {\"filter\":{\"createdAt\":{\"startAt\":\"2018-02-27T20:12:04.524Z\",\"endAt\":\"2018-02-27T20:12:04.524Z\"}}}
+accept-encoding: gzip, compress, deflate, br
+body: {\"filter\":{\"createdAt\":{\"startAt\":\"2023-01-07T00:00:00.524Z\",\"endAt\":\"2023-01-07T00:00:00.524Z\"}}}
 
 HTTP/1.1 200 OK
 server: nginx
-date: Tue, 27 Feb 2018 20:12:04 GMT
+date: Sat, 7 Jan 2023 00:00:00 GMT
 content-type: application/json;charset=UTF-8
 content-length: 178
 connection: close
 
-{"requestId":"287#161d8e4bd0a","result":[{"exportId":"be54257c-84a5-4d76-a11c-ef69bfa3389f","format":"CSV","status":"Created","createdAt":"2018-02-27T20:12:04Z"}],"success":true}
+{"requestId":"287#161d8e4bd0a","result":[{"exportId":"be54257c-84a5-4d76-a11c-ef69bfa3389f","format":"CSV","status":"Created","createdAt":"2023-01-07T00:00:00Z"}],"success":true}

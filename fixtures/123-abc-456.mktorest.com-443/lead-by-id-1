@@ -1,8 +1,7 @@
 GET /rest/v1/lead/1.json
-accept: */*
-host: 123-abc-456.mktorest.com
-accept-encoding: gzip, deflate
-authorization: Bearer bda399e0-a68e-4d9b-bc2f-aa2657746b06:ablakjsdlaskjdfl
+accept: application/json, text/plain, */*
+accept-encoding: gzip, compress, deflate, br
+body: {\"query\":{}}
 
 200 HTTP/1.1
 server: nginx

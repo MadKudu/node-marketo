@@ -1,8 +1,7 @@
-GET /rest/v1/leads.json?filterType=id&filterValues=1
-accept: */*
-host: 123-abc-456.mktorest.com
-accept-encoding: gzip, deflate
-authorization: Bearer foobar
+GET /rest/v1/leads.json
+accept: application/json, text/plain, */*
+accept-encoding: gzip, compress, deflate, br
+body: {\"query\":{\"filterType\":\"id\",\"filterValues\":\"1\"}}
 
 200 HTTP/1.1
 server: nginx

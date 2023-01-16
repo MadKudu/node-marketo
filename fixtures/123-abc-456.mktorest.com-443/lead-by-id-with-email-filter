@@ -1,7 +1,7 @@
-GET /rest/v1/lead/1.json?fields=email
-accept: */*
-host: 123-abc-456.mktorest.com
-accept-encoding: gzip, deflate
+GET /rest/v1/lead/1.json
+accept: application/json, text/plain, */*
+accept-encoding: gzip, compress, deflate, br
+body: {\"query\":{\"fields\":\"email\"}}
 
 200 HTTP/1.1
 server: nginx
