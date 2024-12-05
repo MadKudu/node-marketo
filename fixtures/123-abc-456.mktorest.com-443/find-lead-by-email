@@ -1,0 +1,13 @@
+GET /rest/v1/leads.json?fields=email,lastName&filterType=email&filterValues=foo%40gmail.com
+accept: application/json, text/plain, */*
+accept-encoding: gzip, compress, deflate, br
+
+200 HTTP/1.1
+server: nginx
+date: Wed, 19 Nov 2014 23:15:13 GMT
+content-type: application/json;charset=UTF-8
+content-length: 121
+connection: keep-alive
+set-cookie: BIGipServerab-restapi_https=587792650.47873.0000; path=/
+
+{"requestId":"179d7#149ca5697d6","result":[{"id":1,"lastName":"test","email":"ak+marketo1@usermind.com"}],"success":true}

@@ -93,6 +93,21 @@ describe('Leads', function () {
           done();
         });
     });
+
+    it('by email - uses multiple filter values and retrieve a subset of fields', function (done) {
+      marketo.lead
+        .find('email', ['foo@gmail.com'], { fields: ['email', 'lastName'] })
+        .then(function (resp) {
+          assert.equal(resp.result.length, 1);
+          assert.equal(resp.result[0].id, 1);
+
+          var lead = resp.result[0];
+          assert.equal(lead.id, 1);
+          assert(_.has(lead, 'email'));
+          assert(_.has(lead, 'lastName'));
+          done();
+        });
+    });
   });
 
   describe('#createOrUpdate', function () {
@@ -105,6 +120,18 @@ describe('Leads', function () {
           assert.equal(resp.result.length, 1);
           assert.equal(resp.result[0].id, 1);
           assert.equal(resp.result[0].status, 'updated');
+          done();
+        })
+        .catch(done);
+    });
+  });
+
+  describe('#associateLead', function () {
+    it('finds a lead by id only', function (done) {
+      marketo.lead
+        .associateLead(578705, 'id:356-YFG-389&token:_mch-mydomain.com-dce599ec86f1c3773ce075014267c852')
+        .then(function (response) {
+          assert.equal(response.result.length, 0);
           done();
         })
         .catch(done);

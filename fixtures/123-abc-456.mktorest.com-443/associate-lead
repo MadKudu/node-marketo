@@ -1,0 +1,14 @@
+POST /rest/v1/leads/578705/associate.json?cookie=id:356-YFG-389%26token:_mch-mydomain.com-dce599ec86f1c3773ce075014267c852
+accept: application/json, text/plain, */*
+content-type: application/json
+accept-encoding: gzip, compress, deflate, br
+body: {}
+
+HTTP/1.1 200 200
+server: nginx
+date: Wed, 04 Dec 2024 17:42:57 GMT
+content-type: application/json;charset=UTF-8
+content-length: 59
+connection: close
+
+{"requestId":"4cda#19392c49414","result":[],"success":true}
